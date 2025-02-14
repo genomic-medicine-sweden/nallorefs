@@ -1,10 +1,20 @@
 {
-    "name": "genomic-medicine-sweden/nallo-refs",
-    "homePage": "https://github.com/genomic-medicine-sweden/nallo-refs",
+    "name": "genomic-medicine-sweden/nallorefs",
+    "homePage": "https://github.com/genomic-medicine-sweden/nallorefs",
     "repos": {
         "https://github.com/nf-core/modules.git": {
             "modules": {
                 "nf-core": {
+                    "bcftools/view": {
+                        "branch": "master",
+                        "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
+                        "installed_by": ["modules"]
+                    },
+                    "gunzip": {
+                        "branch": "master",
+                        "git_sha": "ce35ce92566b3328b405253543b9b2b4d4e5f4f7",
+                        "installed_by": ["modules"]
+                    }
                 }
             },
             "subworkflows": {

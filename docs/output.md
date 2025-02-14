@@ -1,4 +1,4 @@
-# genomic-medicine-sweden/nallo-refs: Output
+# genomic-medicine-sweden/nallorefs: Output
 
 ## Introduction
 

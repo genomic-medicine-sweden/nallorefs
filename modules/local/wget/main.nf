@@ -11,7 +11,7 @@ process WGET {
     tuple val(meta), val(download_path)
 
     output:
-    path('*'), emit: download
+    tuple val(meta), path('*'), emit: download
 
     when:
     task.ext.when == null || task.ext.when
@@ -23,7 +23,7 @@ process WGET {
 
     stub:
     """
-    touch $path
+    touch $download_path
     """
 
 }

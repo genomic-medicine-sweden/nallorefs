@@ -80,7 +80,7 @@ workflow NALLOREFS {
     ch_echtvar_encode_cadd_snvs_json = fileChannelOf("${projectDir}/assets/ecthvar_encode_cadd_snvs.json") // TODO: move to reference-files?
     // ClinVar
     ch_clinvar_vcf                       = fileChannelOf(params.clinvar)
-    ch_clinvar_rename_chrs               = fileChannelOf(base_reference_dir + 'nallo/annotation/grch38_clinvar_rename_chromosomes_-v1.0-.txt').map { _meta, file -> file }
+    ch_clinvar_rename_chrs               = fileChannelOf(params.base_reference_dir + 'nallo/annotation/grch38_clinvar_rename_chromosomes_-v1.0-.txt').map { _meta, file -> file }
     ch_vcfexpress_add_clnvid_prelude     = fileChannelOf("${projectDir}/assets/vcfexpress_add_clnvid_prelude.lua")
     // CoLoRSdb SNVs - path changes every new Zenodo release
     ch_colorsdb_snvs                     = fileChannelOf("https://zenodo.org/records/14814308/files/CoLoRSdb.GRCh38.v1.2.0.deepvariant.glnexus.vcf.gz")

@@ -12,7 +12,19 @@
 
 ## Introduction
 
-**genomic-medicine-sweden/nallorefs** is a bioinformatics pipeline that ...
+**genomic-medicine-sweden/nallorefs** is a bioinformatics pipeline that downloads _most_ references for genomic-medicine-sweden/nallo.
+
+For CADD-resources, CADD SNVs and GnomAD SNVs, these files are so large that this pipeline will not download them (yet), rather it checks md5sums and then post-process thems instead. They can be downloaded with:
+
+```
+# Download CADD annotations 
+wget -c https://kircherlab.bihealth.org/download/CADD/v1.6/GRCh38/annotationsGRCh38_v1.6.tar.gz
+# Download CADD SNVs
+wget -c https://kircherlab.bihealth.org/download/CADD/v1.6/GRCh38/whole_genome_SNVs.tsv.gz
+# Download gnomad
+echo {1..22} X Y | xargs -d ' ' -n 1 -P 10 -I {} wget -c https://storage.googleapis.com/gcp-public-data--gnomad/release/4.1/vcf/genomes/gnomad.genomes.v4.1.sites.chr{}.vcf.bgz
+```
+
 
 <!-- TODO nf-core:
    Complete this sentence with a 2-3 sentence summary of what types of data the pipeline ingests, a brief overview of the

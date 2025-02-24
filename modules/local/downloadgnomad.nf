@@ -1,4 +1,4 @@
-process CADD2VCF {
+process DOWNLOADGNOMAD {
     tag "$meta.id"
     label 'process_single'
 
@@ -11,9 +11,11 @@ process CADD2VCF {
     tuple val(meta), path(download_path)
 
     output:
-    tuple val(meta), path("*.bcf.gz"), emit: bcf
-    tuple val(meta), path(".csi")    , emit: csi
-    path "versions.yml"              , emit: versions
+    tuple val(meta), path("*.vcf.gz")    , emit: vcf, optional: true
+    tuple val(meta), path("*.bcf.gz")    , emit: bcf, optional: true
+    tuple val(meta), path("*.bcf.gz.csi"), emit: csi, optional: true
+    tuple val(meta), path("*.vcf.gz.tbi"), emit: tbi, optional: true
+    path "versions.yml"                  , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
@@ -21,35 +23,21 @@ process CADD2VCF {
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
+    def extension = args.contains("--output-type b") || args.contains("-Ob") ? "bcf.gz" :
+                    args.contains("--output-type u") || args.contains("-Ou") ? "bcf" :
+                    args.contains("--output-type z") || args.contains("-Oz") ? "vcf.gz" :
+                    args.contains("--output-type v") || args.contains("-Ov") ? "vcf" :
+                    "vcf"
     // TODO: Perhaps remove annotate header line here so that md5sum can be snapshot
     """
-    gunzip -c ${download_path} | \\
-        awk '
-            BEGIN {
-                # Print the VCF headere
-                print "##fileformat=VCFv4.2";
-                print "##INFO=<ID=raw,Number=1,Type=Float,Description=\"raw cadd score\">";
-                print "##INFO=<ID=phred,Number=1,Type=Float,Description=\"phred-scaled cadd score\">";
-                for (i = 1; i <= 22; i++) print "##contig=<ID=" i ">";
-                print "##contig=<ID=X>";
-                print "##contig=<ID=Y>";
-            }
-            NR==1 {
-                sub(/^# /, "", \$0);
-                print "##CADDCOMMENT=<ID=comment,comment=\\"" \$0 "\\">";# Skip the second line
-                print "#CHROM\\tPOS\\tID\\tREF\\tALT\\tQUAL\\tFILTER\\tINFO";
-                next;
-            }
-            NR > 2 {
-                # Process data lines
-                printf "%s\\t%s\\t.\\t%s\\t%s\\t1\\tPASS\\traw=%.2f;phred=%.2f\\n", \$1, \$2, \$3, \$4, \$5, \$6;
-            }' | \\
         bcftools \\
-            view \\
+            annotate \\
+            $args \\
             --threads ${task.cpus-1} \\
-            --output-type b \\
-            --write-index \\
-            --output ${prefix}.bcf.gz
+            --include "FILTER='PASS'" \\
+            --remove ^INFO/AF,INFO/AF_grpmax \\
+            --output ${prefix}.${extension} \\
+            ${download_path}
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":

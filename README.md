@@ -28,6 +28,17 @@ cd gnomad
 echo {1..22} X Y | xargs -d ' ' -n 1 -P 10 -I {} wget -c https://storage.googleapis.com/gcp-public-data--gnomad/release/4.1/vcf/genomes/gnomad.genomes.v4.1.sites.chr{}.vcf.bgz
 ```
 
+##### Obtaining non-public reference files
+
+The rank model downloaded with this pipeline also assumes you will input SpliceAI scores to VEP via `--vep_plugin_files` in Nallo. The precomputed spliceAI scores are available on [basespace](https://basespace.illumina.com/s/otSPW8hnhaZR). Download the raw SNV and INDEL score files, rename them and place them in the reference directory.
+
+```
+SpliceAI/spliceai_scores.raw.indel.hg38.vcf.gz
+SpliceAI/spliceai_scores.raw.indel.hg38.vcf.gz.tbi
+SpliceAI/spliceai_scores.raw.snv.hg38.vcf.gz
+SpliceAI/spliceai_scores.raw.snv.hg38.vcf.gz.tbi
+```
+
 <!-- TODO nf-core:
    Complete this sentence with a 2-3 sentence summary of what types of data the pipeline ingests, a brief overview of the
    major pipeline sections and the types of output it produces. You're giving an overview to someone new

@@ -9,6 +9,8 @@ Initial release of genomic-medicine-sweden/nallorefs, created with the [nf-core]
 
 ### `Added`
 
+- [#1](https://github.com/genomic-medicine-sweden/nallorefs/pull/1) - Initial version
+  
 ### `Fixed`
 
 ### `Dependencies`

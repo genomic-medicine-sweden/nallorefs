@@ -40,19 +40,15 @@ workflow NALLOREFS {
     ch_samplesheet // channel: mock samplesheet read in from --input
 
     main:
-    //
     // All files that can be downloaded without post-processing are created from downloadChannelOf 
     // and downloaded with a WGET process to control publishDir. Files that can be put in directly into the
     // pipeline outdir are downloaded though WGET_GENERAL. Files that needs to be put into specific directory
     // structures are downloaded with their respective WGET_* process.
     //
-    // All files that requries some form of post-processing are created with Channel.fromPath('...') and are
-    // staged by the Nextflow headjob, input into a process and published by the final process. Some of these
-    // are quite large, e.g. the CADD resources, and may be better downloaded in a process rather than by the head job.
-    // Then they would each require a download process, or meta to branch later. Unclear what is best here.
-    // If it's one download at a time maybe head job staging is not the way to go.
-    //
-
+    // Most files that requries some form of post-processing are created with Channel.fromPath('...') and are
+    // staged by the Nextflow headjob, input into a process and published by the final process, except for some of
+    // the bigger ones e.g. the CADD resources, that may be better downloaded in a process.
+    
     // General files stored in reference-files
     ch_genmod_reduced_penetrance = downloadChannelOf(params.base_reference_dir + 'nallo/annotation/grch38_reduced_penetrance_-v1.0-.tsv')
     ch_trgt_pathogenic_repeats   = downloadChannelOf(params.base_reference_dir + 'nallo/annotation/grch38_trgt_pathogenic_repeats.bed')
@@ -110,7 +106,6 @@ workflow NALLOREFS {
     // Initialise channels
     ch_versions                  = Channel.empty()
     ch_general_files_to_download = Channel.empty()
-    ch_files_to_unzip            = Channel.empty()
     ch_echtvar_encode_files      = Channel.empty() 
     
     //
@@ -141,19 +136,13 @@ workflow NALLOREFS {
     }
     
     //
-    // Unzip downloaded files
+    // Unzip/untar downloaded files
     // 
-    ch_files_to_unzip = ch_files_to_unzip
-        .mix(ch_reference_genome)
-
+    
     GUNZIP (
-        ch_files_to_unzip
+        ch_reference_genome
     )
     
-    //
-    // Untar VEP cache - 26GB download
-    //
-    // TODO: Fix error with untar - is there an error?
     if(!params.skip_vep_cache) {
         UNTAR_VEP_CACHE (
             ch_vep_cache
@@ -161,7 +150,7 @@ workflow NALLOREFS {
     }
     
     //
-    // Untar CADD resources - 200GB download
+    // Download CADD resources (200GB)
     //
     if(!params.skip_cadd_annotations) {
         
@@ -174,7 +163,6 @@ workflow NALLOREFS {
             .mix(WGET_CADD_ANNOTATIONS.out.download)
             .set { ch_cadd_annotations_to_untar }
         
-        // Should take ~20 min for 200 GB file
         MD5SUM_CADD_ANNOTATIONS (
             ch_cadd_annotations_to_untar,
             false
@@ -200,7 +188,7 @@ workflow NALLOREFS {
     }
     
     //
-    // CADD SNVs to echtvar
+    // Download CADD SNVs and convert to echtvar zip
     //
     if (!params.skip_cadd_snvs) {
         
@@ -213,7 +201,6 @@ workflow NALLOREFS {
                 .mix(WGET_CADD_SNVS.out.download)
                 .set { ch_cadd_snvs_to_convert }
 
-            // Should take ~20 min for 200 GB file
             MD5SUM_CADD_SNVS (
                 ch_cadd_snvs_to_convert,
                 false
@@ -241,7 +228,8 @@ workflow NALLOREFS {
     }
     
     //
-    // Reformat ClinVar to reference genome and Scout compatibility (1 -> chr1 & ID -> INFO/CLNVID, annotated via VEP)
+    // Reformat ClinVar to reference genome and Scout compatibility
+    // (1 -> chr1 & ID -> INFO/CLNVID, annotated via VEP)
     //
     if(!params.skip_clinvar) {
         CLINVAR (
@@ -252,16 +240,8 @@ workflow NALLOREFS {
         ) 
     }
 
-    // CoLoRSdb SNVs
-    ch_echtvar_encode_files = ch_echtvar_encode_files
-        .mix(
-            ch_colorsdb_snvs
-                .combine(ch_echtvar_encode_colorsdb_snvs_json)
-                .map { vcf_meta, vcf, _json_meta, json -> [ vcf_meta, vcf, json ] }
-            )
-    
     //
-    // Download/Get GnomAD local files and strip info/convert on the fly
+    // Download/Get GnomAD local files and strip info/convert
     //
     if(!params.skip_gnomad_snvs) {
         
@@ -279,9 +259,20 @@ workflow NALLOREFS {
             )
     }
     
+    
+    
+    
     //
-    // Echtvar SNV databases
+    // Echtvar SNV databases - GnomAD, CADD, CoLoRsDB
     //  
+    
+    ch_echtvar_encode_files = ch_echtvar_encode_files
+        .mix(
+            ch_colorsdb_snvs
+                .combine(ch_echtvar_encode_colorsdb_snvs_json)
+                .map { vcf_meta, vcf, _json_meta, json -> [ vcf_meta, vcf, json ] }
+            )
+    
     ch_echtvar_encode_files
         .multiMap { vcf_meta, vcf, json -> 
             vcf:  [ vcf_meta, vcf ]
@@ -310,7 +301,7 @@ workflow NALLOREFS {
             name:  'nallorefs_software_'  + 'versions.yml',
             sort: true,
             newLine: true
-        ).set { ch_collated_versions }
+        )
 
     emit:
     versions       = ch_versions                 // channel: [ path(versions.yml) ]

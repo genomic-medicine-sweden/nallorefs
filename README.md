@@ -12,19 +12,21 @@
 
 ## Introduction
 
-**genomic-medicine-sweden/nallorefs** is a bioinformatics pipeline that downloads _most_ references for genomic-medicine-sweden/nallo.
+**genomic-medicine-sweden/nallorefs** is a bioinformatics pipeline that downloads _most_ of a set of references that [genomic-medicine-sweden/nallo](https://github.com/genomic-medicine-sweden/nallo) can use (but is not limited to).
 
-For CADD-resources, CADD SNVs and GnomAD SNVs, these files are so large that this pipeline will not download them (yet), rather it checks md5sums and then post-process thems instead. They can be downloaded with:
+For CADD-resources, CADD SNVs and GnomAD SNVs, these files are so large that while the pipeline may be able to download them, it might be better to download them manually. They can then be input into the pipeline with `--cadd_annotations`, `--cadd_snvs` and `--gnomad_base_path` (which should point to the directory where the gnomad chromosome VCFs are stored). The md5sum will be cheched, and they will be processed by the pipeline.
 
+These files can be downloaded with:
 ```
 # Download CADD annotations 
 wget -c https://kircherlab.bihealth.org/download/CADD/v1.6/GRCh38/annotationsGRCh38_v1.6.tar.gz
 # Download CADD SNVs
 wget -c https://kircherlab.bihealth.org/download/CADD/v1.6/GRCh38/whole_genome_SNVs.tsv.gz
 # Download gnomad
+mkdir -p gnomad
+cd gnomad
 echo {1..22} X Y | xargs -d ' ' -n 1 -P 10 -I {} wget -c https://storage.googleapis.com/gcp-public-data--gnomad/release/4.1/vcf/genomes/gnomad.genomes.v4.1.sites.chr{}.vcf.bgz
 ```
-
 
 <!-- TODO nf-core:
    Complete this sentence with a 2-3 sentence summary of what types of data the pipeline ingests, a brief overview of the
@@ -64,7 +66,6 @@ Now, you can run the pipeline using:
 ```bash
 nextflow run genomic-medicine-sweden/nallorefs \
    -profile <docker/singularity/.../institute> \
-   --input samplesheet.csv \
    --outdir <OUTDIR>
 ```
 

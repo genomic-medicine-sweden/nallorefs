@@ -8,6 +8,7 @@ include { CLINVAR                                                    } from '../
 include { GNOMAD_SNVS                                                } from '../subworkflows/local/gnomad_snvs/main'
 include { GUNZIP                                                     } from '../modules/nf-core/gunzip/'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_CADD_SNVS                   } from '../modules/nf-core/bcftools/view/'
+include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_GNOMAD_SVS                  } from '../modules/nf-core/bcftools/view/'
 include { ECHTVAR_ENCODE                                             } from '../modules/local/echtvar/encode/'
 include { MD5SUM as MD5SUM_CADD_ANNOTATIONS                          } from '../modules/nf-core/md5sum/main'
 include { MD5SUM as MD5SUM_CADD_SNVS                                 } from '../modules/nf-core/md5sum/main'
@@ -83,10 +84,8 @@ workflow NALLOREFS {
     ch_echtvar_encode_colorsdb_snvs_json = fileChannelOf("${projectDir}/assets/echtvar_encode_colorsdb_snvs.json") // TODO: move to reference-files?
     // CoLoRSdb SVs - could think of renaming these, or storing in a separate location
     ch_colorsdb_svs_vcf                  = downloadChannelOf('https://zenodo.org/records/14814308/files/CoLoRSdb.GRCh38.v1.2.0.pbsv.jasmine.vcf.gz')
-    ch_colorsdb_svs_tbi                  = downloadChannelOf('https://zenodo.org/records/14814308/files/CoLoRSdb.GRCh38.v1.2.0.pbsv.jasmine.vcf.gz.tbi')
     // GnomAD SVs
-    ch_gnomad_svs_vcf                    = downloadChannelOf("https://storage.googleapis.com/gcp-public-data--gnomad/release/4.1/genome_sv/gnomad.v4.1.sv.sites.vcf.gz")
-    ch_gnomad_svs_tbi                    = downloadChannelOf("https://storage.googleapis.com/gcp-public-data--gnomad/release/4.1/genome_sv/gnomad.v4.1.sv.sites.vcf.gz.tbi")
+    ch_gnomad_svs_vcf                    = fileChannelOf("https://storage.googleapis.com/gcp-public-data--gnomad/release/4.1/genome_sv/gnomad.v4.1.sv.sites.vcf.gz")
     // GnomAD SNVs
     ch_echtvar_encode_gnomad_snvs_json   = fileChannelOf("${projectDir}/assets/gnomad.json") // TODO: move to reference-files?
     chromosomes = (1..22) + ['X', 'Y']
@@ -128,9 +127,6 @@ workflow NALLOREFS {
             .mix(ch_vep_loftool_scores)
             .mix(ch_vep_pli_values)
             .mix(ch_colorsdb_svs_vcf) // TODO: think about renaming the output files of these - and check md5
-            .mix(ch_colorsdb_svs_tbi) // TODO: think about renaming the output files of these - and check md5
-            .mix(ch_gnomad_svs_vcf)   // TODO: think about renaming the output files of these - and check md5
-            .mix(ch_gnomad_svs_tbi)   // TODO: think about renaming the output files of these - and check md5
         WGET_GENERAL ( ch_general_files_to_download )
 
     }
@@ -259,8 +255,15 @@ workflow NALLOREFS {
             )
     }
     
-    
-    
+    //
+    // Remove `CNV` SV-type, else SVDB will fail, e.g. https://github.com/nf-core/raredisease/issues/615
+    //
+    BCFTOOLS_VIEW_GNOMAD_SVS (
+        ch_gnomad_svs_vcf.map { meta, vcf -> [ meta, vcf, [] ] },
+        [],
+        [],
+        []
+    ) 
     
     //
     // Echtvar SNV databases - GnomAD, CADD, CoLoRsDB

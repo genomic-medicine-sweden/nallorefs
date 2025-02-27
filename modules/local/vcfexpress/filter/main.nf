@@ -18,7 +18,7 @@ process VCFEXPRESS_FILTER {
     script:
     def args    = task.ext.args ?: ''
     prefix      = task.ext.prefix ?: "${meta.id}"
-    expression = args.contains('--expression') || args.contains('-e') ? '' : '--expression "return true"'
+    expression = args.contains(' --expression ') || args.contains(' -e ') ? '' : '--expression "return true"'
     """
     vcfexpress filter \\
         $args \\

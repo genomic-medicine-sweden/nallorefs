@@ -25,7 +25,7 @@ wget -c https://kircherlab.bihealth.org/download/CADD/v1.6/GRCh38/whole_genome_S
 # Download gnomad
 mkdir -p gnomad
 cd gnomad
-echo {1..22} X Y | xargs -d ' ' -n 1 -P 10 -I {} wget -c https://storage.googleapis.com/gcp-public-data--gnomad/release/4.1/vcf/genomes/gnomad.genomes.v4.1.sites.chr{}.vcf.bgz
+echo {1..22} X Y | tr ' ' '\n' | xargs -d ' ' -n 1 -P 10 -I {} wget -c https://storage.googleapis.com/gcp-public-data--gnomad/release/4.1/vcf/genomes/gnomad.genomes.v4.1.sites.chr{}.vcf.bgz
 ```
 
 ##### Obtaining non-public reference files

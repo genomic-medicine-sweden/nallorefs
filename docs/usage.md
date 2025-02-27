@@ -4,14 +4,14 @@
 
 ## Introduction
 
-<!-- TODO nf-core: Add documentation about anything specific to running your pipeline. For general topics, please point to (and add to) the main nf-core website. -->
+This pipeline will download and prepare a set of references that can be used with [Nallo](https://github.com/genomic-medicine-sweden/nallo).
 
 ## Running the pipeline
 
 The typical command for running the pipeline is as follows:
 
 ```bash
-nextflow run genomic-medicine-sweden/nallorefs --outdir ./results  -profile docker
+nextflow run genomic-medicine-sweden/nallorefs --outdir ./references  -profile docker
 ```
 
 This will launch the pipeline with the `docker` configuration profile. See below for more information about profiles.

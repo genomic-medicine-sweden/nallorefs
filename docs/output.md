@@ -178,7 +178,7 @@ May be given to stranger with `--stranger_repeat_catalog`, as described [here](h
 vep_cache
 ```
 
-Contains merged vep cache input with `--vep_cache`, as described [here](https://genomic-medicine-sweden.github.io/nallo/latest/usage/#snv-annotation). By default this pipeline downloads the merged cache, so you may need to update your config file for `ENSEMBLVEP_SNV` and `ÈNSEMBLVEP_SV`, becuase Nallo by default does not expect the merged cache.
+Contains merged vep cache input with `--vep_cache`, as described [here](https://genomic-medicine-sweden.github.io/nallo/latest/usage/#snv-annotation). By default this pipeline downloads the merged cache, so you may need to update your config file for `ENSEMBLVEP_SNV` and `ENSEMBLVEP_SV`, becuase Nallo by default does not expect the merged cache.
 
 The config could for example look like this:
 

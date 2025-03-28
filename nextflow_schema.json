@@ -161,7 +161,7 @@
         },
         "vep_cache_version": {
             "type": "integer",
-            "default": 112
+            "default": 110
         },
         "vep_cache_type": {
             "type": "string",

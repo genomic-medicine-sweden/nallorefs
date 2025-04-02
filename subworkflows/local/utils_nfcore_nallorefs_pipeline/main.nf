@@ -1,5 +1,5 @@
 //
-// Subworkflow with functionality specific to the genomic-medicine-sweden/nallo-refs pipeline
+// Subworkflow with functionality specific to the genomic-medicine-sweden/nallorefs pipeline
 //
 
 /*
@@ -137,4 +137,13 @@ def validateInputSamplesheet(input) {
     }
 
     return [ metas[0], fastqs ]
+}
+
+def assertChecksum(channel, expected_checksum) {
+    channel
+        .map { _meta, file -> 
+            def checksum = file.readLines().collect { line -> line.split('  ')[0] }[0]
+            def filename = file.readLines().collect { line -> line.split('  ')[1] }[0]
+            assert checksum == expected_checksum : "Checksum for ${filename} was '${checksum}' but expected '${expected_checksum}'"
+        }
 }

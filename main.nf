@@ -1,9 +1,9 @@
 #!/usr/bin/env nextflow
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    genomic-medicine-sweden/nallo-refs
+    genomic-medicine-sweden/nallorefs
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    Github : https://github.com/genomic-medicine-sweden/nallo-refs
+    Github : https://github.com/genomic-medicine-sweden/nallorefs
 ----------------------------------------------------------------------------------------
 */
 
@@ -13,9 +13,9 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { NALLO-REFS  } from './workflows/nallo-refs'
-include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_nallo-refs_pipeline'
-include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_nallo-refs_pipeline'
+include { NALLOREFS  } from './workflows/nallorefs'
+include { PIPELINE_INITIALISATION } from './subworkflows/local/utils_nfcore_nallorefs_pipeline'
+include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_nallorefs_pipeline'
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     NAMED WORKFLOWS FOR PIPELINE
@@ -25,7 +25,7 @@ include { PIPELINE_COMPLETION     } from './subworkflows/local/utils_nfcore_nall
 //
 // WORKFLOW: Run main analysis pipeline depending on type of input
 //
-workflow GENOMICMEDICINESWEDEN_NALLO-REFS {
+workflow GENOMICMEDICINESWEDEN_NALLOREFS {
 
     take:
     samplesheet // channel: samplesheet read in from --input
@@ -35,7 +35,7 @@ workflow GENOMICMEDICINESWEDEN_NALLO-REFS {
     //
     // WORKFLOW: Run pipeline
     //
-    NALLO-REFS (
+    NALLOREFS (
         samplesheet
     )
 }
@@ -63,7 +63,7 @@ workflow {
     //
     // WORKFLOW: Run main workflow
     //
-    GENOMICMEDICINESWEDEN_NALLO-REFS (
+    GENOMICMEDICINESWEDEN_NALLOREFS (
         PIPELINE_INITIALISATION.out.samplesheet
     )
     //

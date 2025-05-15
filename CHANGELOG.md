@@ -3,9 +3,11 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 0.2.0dev - [date]
+## 0.2.0 - [2025-04-15]
 
 ### `Added`
+
+- [#17](https://github.com/genomic-medicine-sweden/nallorefs/pull/17) - Added new and updated some of the current repeat definitions, for more information see https://github.com/Clinical-Genomics/reference-files/pull/97
 
 ### `Changed`
 
@@ -15,6 +17,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### `Removed`
 
 ### `Fixed`
+
+- [#17](https://github.com/genomic-medicine-sweden/nallorefs/pull/17) - Fixed version mismatch in rank models, for more information see: https://github.com/Clinical-Genomics/reference-files/pull/98
 
 ## 0.1.1 - [2025-04-07]
 

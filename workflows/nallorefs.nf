@@ -10,10 +10,12 @@ include { GNOMAD_SNVS                                                } from '../
 include { GUNZIP                                                     } from '../modules/nf-core/gunzip/'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_CADD_SNVS                   } from '../modules/nf-core/bcftools/view/'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_GNOMAD_SVS                  } from '../modules/nf-core/bcftools/view/'
+include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_SVDB_LOCAL_DATABASES        } from '../modules/nf-core/bcftools/view/'
 include { ECHTVAR_ENCODE                                             } from '../modules/local/echtvar/encode/'
 include { MD5SUM as MD5SUM_CADD_ANNOTATIONS                          } from '../modules/nf-core/md5sum/main'
 include { MD5SUM as MD5SUM_CADD_SNVS                                 } from '../modules/nf-core/md5sum/main'
 include { MD5SUM as MD5SUM_LOCAL_ECTHVAR_DATABASES                   } from '../modules/nf-core/md5sum/main'
+include { MD5SUM as MD5SUM_LOCAL_SVDB_DATABASES                      } from '../modules/nf-core/md5sum/main'
 include { UNTAR as UNTAR_VEP_CACHE                                   } from '../modules/nf-core/untar/main'
 include { UNTAR as UNTAR_CADD_ANNOTATIONS                            } from '../modules/nf-core/untar/main'
 include { WGET as WGET_CADD_ANNOTATIONS                              } from '../modules/local/wget/'
@@ -23,7 +25,7 @@ include { WGET as WGET_GENERAL                                       } from '../
 include { WGET as WGET_VEP_PLUGIN_FILES                              } from '../modules/local/wget/'
 include { paramsSummaryMap                                           } from 'plugin/nf-schema'
 include { softwareVersionsToYAML                                     } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-include { assertChecksum                                             } from '../subworkflows/local/utils_nfcore_nallorefs_pipeline/main'
+include { assertChecksum; assertChecksumChannel                      } from '../subworkflows/local/utils_nfcore_nallorefs_pipeline/main'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -106,6 +108,11 @@ workflow NALLOREFS {
         .map { meta, vcf, json ->
             [ meta + [ 'id': file(vcf).name ], vcf, json ] } : Channel.empty()
 
+    // Local SV databases
+    ch_svdb_local_databases = params.local_svdb_databases ? Channel.fromList(samplesheetToList(params.local_svdb_databases, 'assets/schema_local_svdb_databases.json'))
+        .map { meta, vcf ->
+            [ meta + [ 'id': file(vcf).name ], vcf ] } : Channel.empty()
+
     // VEP cache - 26 Gb
     vep_cache_type_string = params.vep_cache_type == "merged" ? '_merged' : ''
     ch_vep_cache = fileChannelOf("https://ftp.ensembl.org/pub/release-${params.vep_cache_version}/variation/indexed_vep_cache/homo_sapiens${vep_cache_type_string}_vep_${params.vep_cache_version}_GRCh38.tar.gz")
@@ -181,7 +188,6 @@ workflow NALLOREFS {
         )
     }
 
-
     //
     // Download CADD indels
     //
@@ -192,7 +198,31 @@ workflow NALLOREFS {
     }
 
     //
+    // Local SVDB SV databases
     //
+    if (!params.skip_local_svdb_databases) {
+
+        BCFTOOLS_VIEW_SVDB_LOCAL_DATABASES (
+            ch_svdb_local_databases.map { meta, vcf -> [ meta, vcf, [] ] },
+            [],
+            [],
+            []
+        )
+
+        // To ensure local files are correct and not corrupted.
+        MD5SUM_LOCAL_SVDB_DATABASES (
+            ch_svdb_local_databases.map { meta, vcf -> [ meta, vcf ] },
+            false
+        )
+
+        assertChecksumChannel (
+            MD5SUM_LOCAL_SVDB_DATABASES.out.checksum,
+            MD5SUM_LOCAL_SVDB_DATABASES.out.checksum.map { meta, _checksum -> meta.md5sum }
+        )
+    }
+
+    //
+    // Local echtvar SNV databases
     //
     if (!params.skip_local_echtvar_databases) {
 
@@ -207,7 +237,7 @@ workflow NALLOREFS {
             false
         )
 
-        assertChecksum (
+        assertChecksumChannel (
             MD5SUM_LOCAL_ECTHVAR_DATABASES.out.checksum,
             MD5SUM_LOCAL_ECTHVAR_DATABASES.out.checksum.map { meta, _checksum -> meta.md5sum }
         )

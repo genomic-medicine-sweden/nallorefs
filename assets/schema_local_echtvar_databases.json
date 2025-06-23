@@ -1,0 +1,47 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://raw.githubusercontent.com/genomic-medicine-sweden/nallorefs/master/assets/schema_local_echtvar_databases.json",
+    "title": "genomic-medicine-sweden/nallorefs pipeline - params.local_ecthvar_databases schema",
+    "description": "Schema for the file provided with params.local_ecthvar_databases",
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "version": {
+                "oneOf": [
+                    {
+                        "type": "string",
+                        "pattern": "^\\S+$"
+                    },
+                    {
+                        "type": "integer"
+                    }
+                ],
+                "pattern": "^\\S+$",
+                "errorMessage": "version must be provided and cannot contain spaces",
+                "meta": ["version"]
+            },
+            "vcf_path": {
+                "type": "string",
+                "format": "file-path",
+                "exists": true,
+                "pattern": "^\\S+\\.(vcf|bcf)(\\.gz)?$",
+                "errorMessage": "Path to VCF cannot contain spaces and must have extension '.vcf', '.bcf', 'vcf.gz' or 'bcf.gz'"
+            },
+            "json_path": {
+                "type": "string",
+                "format": "file-path",
+                "exists": true,
+                "pattern": "^\\S+\\.json$",
+                "errorMessage": "Path to echtvar json for local database, cannot contain spaces and must have extension '.json'",
+            },
+            "md5sum": {
+                "type": "string",
+                "pattern": "^\\S+$",
+                "errorMessage": "md5sum must be provided and cannot contain spaces",
+                "meta": ["md5sum"]
+            }
+        },
+        "required": ["vcf_path", "json_path", "md5sum"]
+    }
+}

@@ -23,6 +23,7 @@ include { WGET as WGET_CADD_INDELS                                   } from '../
 include { WGET as WGET_CADD_SNVS                                     } from '../modules/local/wget/'
 include { WGET as WGET_GENERAL                                       } from '../modules/local/wget/'
 include { WGET as WGET_VEP_PLUGIN_FILES                              } from '../modules/local/wget/'
+include { WGET as WGET_LOCAL_SVDB_DATABASES                              } from '../modules/local/wget/'
 include { paramsSummaryMap                                           } from 'plugin/nf-schema'
 include { softwareVersionsToYAML                                     } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { assertChecksum; assertChecksumChannel                      } from '../subworkflows/local/utils_nfcore_nallorefs_pipeline/main'
@@ -108,11 +109,6 @@ workflow NALLOREFS {
         .map { meta, vcf, json ->
             [ meta + [ 'id': file(vcf).name ], vcf, json ] } : Channel.empty()
 
-    // Local SV databases
-    ch_svdb_local_databases = params.local_svdb_databases ? Channel.fromList(samplesheetToList(params.local_svdb_databases, 'assets/schema_local_svdb_databases.json'))
-        .map { meta, vcf ->
-            [ meta + [ 'id': file(vcf).name ], vcf ] } : Channel.empty()
-
     // VEP cache - 26 Gb
     vep_cache_type_string = params.vep_cache_type == "merged" ? '_merged' : ''
     ch_vep_cache = fileChannelOf("https://ftp.ensembl.org/pub/release-${params.vep_cache_version}/variation/indexed_vep_cache/homo_sapiens${vep_cache_type_string}_vep_${params.vep_cache_version}_GRCh38.tar.gz")
@@ -194,30 +190,6 @@ workflow NALLOREFS {
     if (!params.skip_cadd_indels) {
         WGET_CADD_INDELS (
             ch_cadd_indels.concat(ch_cadd_indels_tbi)
-        )
-    }
-
-    //
-    // Local SVDB SV databases
-    //
-    if (!params.skip_local_svdb_databases) {
-
-        BCFTOOLS_VIEW_SVDB_LOCAL_DATABASES (
-            ch_svdb_local_databases.map { meta, vcf -> [ meta, vcf, [] ] },
-            [],
-            [],
-            []
-        )
-
-        // To ensure local files are correct and not corrupted.
-        MD5SUM_LOCAL_SVDB_DATABASES (
-            ch_svdb_local_databases.map { meta, vcf -> [ meta, vcf ] },
-            false
-        )
-
-        assertChecksumChannel (
-            MD5SUM_LOCAL_SVDB_DATABASES.out.checksum,
-            MD5SUM_LOCAL_SVDB_DATABASES.out.checksum.map { meta, _checksum -> meta.md5sum }
         )
     }
 

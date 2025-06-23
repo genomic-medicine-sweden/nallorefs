@@ -3,15 +3,30 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 0.3.0dev - [XXXX-XX-XX]
+## unreleased - [XXXX-XX-XX]
 
 ### `Added`
 
+- [#](https://github.com/genomic-medicine-sweden/nallorefs/pull/) - Added the option to supply local SNV databases with `--local_echtvar_databases`
+
 ### `Changed`
+
+- [#](https://github.com/genomic-medicine-sweden/nallorefs/pull/) - Updated reference files with updated repeat definitions
+- [#](https://github.com/genomic-medicine-sweden/nallorefs/pull/) - Updated ClinVar version
 
 ### `Removed`
 
 ### `Fixed`
+
+### Parameters
+| Old parameter | New parameter               |
+| ------------- | --------------------------- |
+|               | `--local_echtvar_databases` |
+
+> [!NOTE]
+> Parameter has been updated if both old and new parameter information is present.
+> Parameter has been added if just the new parameter information is present.
+> Parameter has been removed if new parameter information isn't present.
 
 ## 0.2.0 - [2025-04-15]
 

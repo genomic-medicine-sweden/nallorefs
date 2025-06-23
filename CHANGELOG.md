@@ -7,16 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
-- [#](https://github.com/genomic-medicine-sweden/nallorefs/pull/) - Added the option to supply local SNV databases with `--local_echtvar_databases`
+- [#21](https://github.com/genomic-medicine-sweden/nallorefs/pull/) - Added the option to supply local SNV databases with `--local_echtvar_databases`
 
 ### `Changed`
 
-- [#](https://github.com/genomic-medicine-sweden/nallorefs/pull/) - Updated reference files with updated repeat definitions
-- [#](https://github.com/genomic-medicine-sweden/nallorefs/pull/) - Updated ClinVar version
+- [#21](https://github.com/genomic-medicine-sweden/nallorefs/pull/21) - Updated reference files with updated repeat definitions and rank models
+- [#21](https://github.com/genomic-medicine-sweden/nallorefs/pull/21) - Updated ClinVar version
 
 ### `Removed`
 
 ### `Fixed`
+
+- [#21](https://github.com/genomic-medicine-sweden/nallorefs/pull/21) - Fixed missing parameters in schema
 
 ### Parameters
 | Old parameter | New parameter               |

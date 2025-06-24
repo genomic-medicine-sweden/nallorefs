@@ -10,10 +10,7 @@
             "type": "object",
             "fa_icon": "fas fa-terminal",
             "description": "Define where the pipeline should find input data and save output data.",
-            "required": [
-                "input",
-                "outdir"
-            ],
+            "required": ["input", "outdir"],
             "properties": {
                 "input": {
                     "type": "string",
@@ -25,7 +22,7 @@
                     "description": "Path to comma-separated file containing information about the samples in the experiment.",
                     "help_text": "You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row.",
                     "fa_icon": "fas fa-file-csv",
-                    "default": "/home/proj/development/rare-disease/felix/nallorefs/assets/samplesheet.csv"
+                    "default": "/home/felix/projects/genomic-medicine-sweden/nallorefs/assets/samplesheet.csv"
                 },
                 "outdir": {
                     "type": "string",
@@ -102,14 +99,7 @@
                     "description": "Method used to save pipeline results to output directory.",
                     "help_text": "The Nextflow `publishDir` option specifies which intermediate files should be saved to the output directory. This option tells the pipeline what method should be used to move these files. See [Nextflow docs](https://www.nextflow.io/docs/latest/process.html#publishdir) for details.",
                     "fa_icon": "fas fa-copy",
-                    "enum": [
-                        "symlink",
-                        "rellink",
-                        "link",
-                        "copy",
-                        "copyNoFollow",
-                        "move"
-                    ],
+                    "enum": ["symlink", "rellink", "link", "copy", "copyNoFollow", "move"],
                     "hidden": true
                 },
                 "monochrome_logs": {
@@ -155,19 +145,19 @@
     "properties": {
         "base_reference_dir": {
             "type": "string",
-            "default": "https://github.com/Clinical-Genomics/reference-files/raw/200ca8afdba59b57d9a366b82980e344c1a69138/"
+            "default": "https://github.com/Clinical-Genomics/reference-files/raw/0b598874732bce84c414e1305b83c3e6b90ab7a6/"
         },
         "clinvar_version": {
             "type": "integer",
-            "default": 20250615
+            "default": 20250217
         },
         "clinvar": {
             "type": "string",
-            "default": "https://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/weekly/clinvar_20250615.vcf.gz"
+            "default": "https://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/weekly/clinvar_20250217.vcf.gz"
         },
         "clinvar_md5sum": {
             "type": "string",
-            "default": "d4915562ec572d256215935ed008800a"
+            "default": "9956fd8275a94f7e32aa283edd8bb172"
         },
         "vep_cache_version": {
             "type": "integer",
@@ -200,6 +190,36 @@
         "gnomad_base_path": {
             "type": "string",
             "default": "https://storage.googleapis.com/gcp-public-data--gnomad/release/4.1/vcf/genomes/"
+        },
+        "local_echtvar_databases": {
+            "type": "string"
+        },
+        "cadd_snvs_echtvar_zip": {
+            "type": "string"
+        },
+        "skip_general_files": {
+            "type": "string"
+        },
+        "skip_vep_cache": {
+            "type": "string"
+        },
+        "skip_cadd_annotations": {
+            "type": "string"
+        },
+        "skip_cadd_indels": {
+            "type": "string"
+        },
+        "skip_local_echtvar_databases": {
+            "type": "string"
+        },
+        "skip_cadd_snvs": {
+            "type": "string"
+        },
+        "skip_clinvar": {
+            "type": "string"
+        },
+        "skip_gnomad_snvs": {
+            "type": "string"
         }
     }
 }

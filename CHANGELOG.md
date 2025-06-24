@@ -12,7 +12,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### `Changed`
 
 - [#21](https://github.com/genomic-medicine-sweden/nallorefs/pull/21) - Updated reference files with updated repeat definitions and rank models
-- [#21](https://github.com/genomic-medicine-sweden/nallorefs/pull/21) - Updated ClinVar version
 
 ### `Removed`
 

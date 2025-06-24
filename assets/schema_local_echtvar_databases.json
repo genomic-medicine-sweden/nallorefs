@@ -4,7 +4,7 @@
     "title": "genomic-medicine-sweden/nallorefs pipeline - params.local_ecthvar_databases schema",
     "description": "Schema for the file provided with params.local_ecthvar_databases",
     "type": "array",
-    "databases": {
+    "items": {
         "type": "object",
         "properties": {
             "version": {

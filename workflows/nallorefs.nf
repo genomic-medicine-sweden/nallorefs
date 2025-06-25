@@ -22,7 +22,7 @@ include { WGET as WGET_CADD_INDELS                                   } from '../
 include { WGET as WGET_CADD_SNVS                                     } from '../modules/local/wget/'
 include { WGET as WGET_GENERAL                                       } from '../modules/local/wget/'
 include { WGET as WGET_VEP_PLUGIN_FILES                              } from '../modules/local/wget/'
-include { WGET as WGET_LOCAL_SVDB_DATABASES                              } from '../modules/local/wget/'
+include { WGET as WGET_LOCAL_SVDB_DATABASES                          } from '../modules/local/wget/'
 include { paramsSummaryMap                                           } from 'plugin/nf-schema'
 include { softwareVersionsToYAML                                     } from '../subworkflows/nf-core/utils_nfcore_pipeline'
 include { assertChecksum; assertChecksumChannel                      } from '../subworkflows/local/utils_nfcore_nallorefs_pipeline/main'

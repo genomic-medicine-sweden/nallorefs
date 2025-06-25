@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### `Added`
 
-- [#21](https://github.com/genomic-medicine-sweden/nallorefs/pull/) - Added the option to supply local SNV databases with `--local_echtvar_databases`
+- [#21](https://github.com/genomic-medicine-sweden/nallorefs/pull/21) - Added the option to supply local SNV databases with `--local_echtvar_databases`
 
 ### `Changed`
 

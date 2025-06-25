@@ -33,7 +33,7 @@
                 "format": "file-path",
                 "exists": true,
                 "pattern": "^\\S+\\.json$",
-                "errorMessage": "Path to echtvar json for local database, cannot contain spaces and must have extension '.json'",
+                "errorMessage": "Path to echtvar json for local database, cannot contain spaces and must have extension '.json'"
             },
             "md5sum": {
                 "type": "string",

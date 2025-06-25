@@ -18,7 +18,7 @@ For CADD-resources, CADD SNVs and GnomAD SNVs, these files are so large that whi
 
 These files can be downloaded with:
 ```
-# Download CADD annotations 
+# Download CADD annotations
 wget -c https://kircherlab.bihealth.org/download/CADD/v1.6/GRCh38/annotationsGRCh38_v1.6.tar.gz
 # Download CADD SNVs
 wget -c https://kircherlab.bihealth.org/download/CADD/v1.6/GRCh38/whole_genome_SNVs.tsv.gz
@@ -38,6 +38,8 @@ SpliceAI/spliceai_scores.raw.indel.hg38.vcf.gz.tbi
 SpliceAI/spliceai_scores.raw.snv.hg38.vcf.gz
 SpliceAI/spliceai_scores.raw.snv.hg38.vcf.gz.tbi
 ```
+> [!NOTE]
+The rank models downloaded with this pipeline currently assumes you are using a local [loqusdb](https://github.com/Clinical-Genomics/loqusdb) database. To run without this, remove the `[loqusdb]` entries in the rank models.
 
 <!-- TODO nf-core:
    Complete this sentence with a 2-3 sentence summary of what types of data the pipeline ingests, a brief overview of the

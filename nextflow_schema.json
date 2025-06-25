@@ -22,7 +22,7 @@
                     "description": "Path to comma-separated file containing information about the samples in the experiment.",
                     "help_text": "You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row.",
                     "fa_icon": "fas fa-file-csv",
-                    "default": "/media/ssd_4tb/felix/projects/fellen31/nallo-refs/genomic-medicine-sweden-nallo-refs/assets/samplesheet.csv"
+                    "default": "/home/felix/projects/genomic-medicine-sweden/nallorefs/assets/samplesheet.csv"
                 },
                 "outdir": {
                     "type": "string",
@@ -145,7 +145,7 @@
     "properties": {
         "base_reference_dir": {
             "type": "string",
-            "default": "https://github.com/Clinical-Genomics/reference-files/raw/b91a412f726bad0003846bc3b3127d0d8d6997ac/"
+            "default": "https://github.com/Clinical-Genomics/reference-files/raw/0b598874732bce84c414e1305b83c3e6b90ab7a6/"
         },
         "clinvar_version": {
             "type": "integer",
@@ -190,6 +190,36 @@
         "gnomad_base_path": {
             "type": "string",
             "default": "https://storage.googleapis.com/gcp-public-data--gnomad/release/4.1/vcf/genomes/"
+        },
+        "local_echtvar_databases": {
+            "type": "string"
+        },
+        "cadd_snvs_echtvar_zip": {
+            "type": "string"
+        },
+        "skip_general_files": {
+            "type": "string"
+        },
+        "skip_vep_cache": {
+            "type": "string"
+        },
+        "skip_cadd_annotations": {
+            "type": "string"
+        },
+        "skip_cadd_indels": {
+            "type": "string"
+        },
+        "skip_local_echtvar_databases": {
+            "type": "string"
+        },
+        "skip_cadd_snvs": {
+            "type": "string"
+        },
+        "skip_clinvar": {
+            "type": "string"
+        },
+        "skip_gnomad_snvs": {
+            "type": "string"
         }
     }
 }

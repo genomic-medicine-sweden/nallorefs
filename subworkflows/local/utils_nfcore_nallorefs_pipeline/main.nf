@@ -141,7 +141,17 @@ def validateInputSamplesheet(input) {
 
 def assertChecksum(channel, expected_checksum) {
     channel
-        .map { _meta, file -> 
+        .map { _meta, file ->
+            def checksum = file.readLines().collect { line -> line.split('  ')[0] }[0]
+            def filename = file.readLines().collect { line -> line.split('  ')[1] }[0]
+            assert checksum == expected_checksum : "Checksum for ${filename} was '${checksum}' but expected '${expected_checksum}'"
+        }
+}
+
+def assertChecksumChannel(channel, expected_checksum_channel) {
+    channel
+        .combine(expected_checksum_channel)
+        .map { _meta, file, expected_checksum ->
             def checksum = file.readLines().collect { line -> line.split('  ')[0] }[0]
             def filename = file.readLines().collect { line -> line.split('  ')[1] }[0]
             assert checksum == expected_checksum : "Checksum for ${filename} was '${checksum}' but expected '${expected_checksum}'"

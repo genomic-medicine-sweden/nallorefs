@@ -1,3 +1,4 @@
+include { samplesheetToList } from 'plugin/nf-schema'
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -12,6 +13,8 @@ include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_GNOMAD_SVS                  } from '../
 include { ECHTVAR_ENCODE                                             } from '../modules/local/echtvar/encode/'
 include { MD5SUM as MD5SUM_CADD_ANNOTATIONS                          } from '../modules/nf-core/md5sum/main'
 include { MD5SUM as MD5SUM_CADD_SNVS                                 } from '../modules/nf-core/md5sum/main'
+include { MD5SUM as MD5SUM_LOCAL_ECTHVAR_DATABASES                   } from '../modules/nf-core/md5sum/main'
+include { MD5SUM as MD5SUM_LOCAL_SVDB_DATABASES                      } from '../modules/nf-core/md5sum/main'
 include { UNTAR as UNTAR_VEP_CACHE                                   } from '../modules/nf-core/untar/main'
 include { UNTAR as UNTAR_CADD_ANNOTATIONS                            } from '../modules/nf-core/untar/main'
 include { WGET as WGET_CADD_ANNOTATIONS                              } from '../modules/local/wget/'
@@ -19,9 +22,10 @@ include { WGET as WGET_CADD_INDELS                                   } from '../
 include { WGET as WGET_CADD_SNVS                                     } from '../modules/local/wget/'
 include { WGET as WGET_GENERAL                                       } from '../modules/local/wget/'
 include { WGET as WGET_VEP_PLUGIN_FILES                              } from '../modules/local/wget/'
+include { WGET as WGET_LOCAL_SVDB_DATABASES                          } from '../modules/local/wget/'
 include { paramsSummaryMap                                           } from 'plugin/nf-schema'
 include { softwareVersionsToYAML                                     } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-include { assertChecksum                                             } from '../subworkflows/local/utils_nfcore_nallorefs_pipeline/main'
+include { assertChecksum; assertChecksumChannel                      } from '../subworkflows/local/utils_nfcore_nallorefs_pipeline/main'
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -41,7 +45,7 @@ workflow NALLOREFS {
     ch_samplesheet // channel: mock samplesheet read in from --input
 
     main:
-    // All files that can be downloaded without post-processing are created from downloadChannelOf 
+    // All files that can be downloaded without post-processing are created from downloadChannelOf
     // and downloaded with a WGET process to control publishDir. Files that can be put in directly into the
     // pipeline outdir are downloaded though WGET_GENERAL. Files that needs to be put into specific directory
     // structures are downloaded with their respective WGET_* process.
@@ -49,7 +53,7 @@ workflow NALLOREFS {
     // Most files that requries some form of post-processing are created with Channel.fromPath('...') and are
     // staged by the Nextflow headjob, input into a process and published by the final process, except for some of
     // the bigger ones e.g. the CADD resources, that may be better downloaded in a process.
-    
+
     // General files stored in reference-files
     ch_genmod_reduced_penetrance = downloadChannelOf(params.base_reference_dir + 'nallo/annotation/grch38_reduced_penetrance_-v1.0-.tsv')
     ch_trgt_pathogenic_repeats   = downloadChannelOf(params.base_reference_dir + 'nallo/annotation/grch38_trgt_pathogenic_repeats.bed')
@@ -73,7 +77,7 @@ workflow NALLOREFS {
     ch_cadd_indels               = downloadChannelOf('https://kircherlab.bihealth.org/download/CADD/v1.6/GRCh38/gnomad.genomes.r3.0.indel.tsv.gz')
     ch_cadd_indels_tbi           = downloadChannelOf('https://kircherlab.bihealth.org/download/CADD/v1.6/GRCh38/gnomad.genomes.r3.0.indel.tsv.gz.tbi')
     // CADD SNVs. Either download and checksum remote file, or just checksum local.
-    ch_cadd_snvs                     = remoteLocalBranchedChannelOf(params.cadd_snvs) 
+    ch_cadd_snvs                     = remoteLocalBranchedChannelOf(params.cadd_snvs)
     ch_echtvar_encode_cadd_snvs_json = fileChannelOf("${projectDir}/assets/ecthvar_encode_cadd_snvs.json") // TODO: move to reference-files?
     // ClinVar
     ch_clinvar_vcf                       = fileChannelOf(params.clinvar)
@@ -95,18 +99,24 @@ workflow NALLOREFS {
         .branch { meta, file_path ->
             remote: file_path.startsWith('https://')
                 return [ meta, file_path ] // return file_path as string
-            local: !file_path.startsWith('https://') 
+            local: !file_path.startsWith('https://')
                 return [ meta, file(file_path) ]
-        } 
+        }
+
+    // Local SNV databases
+    ch_echtvar_local_databases = params.local_echtvar_databases ? Channel.fromList(samplesheetToList(params.local_echtvar_databases, 'assets/schema_local_echtvar_databases.json'))
+        .map { meta, vcf, json ->
+            [ meta + [ 'id': file(vcf).name ], vcf, json ] } : Channel.empty()
+
     // VEP cache - 26 Gb
     vep_cache_type_string = params.vep_cache_type == "merged" ? '_merged' : ''
     ch_vep_cache = fileChannelOf("https://ftp.ensembl.org/pub/release-${params.vep_cache_version}/variation/indexed_vep_cache/homo_sapiens${vep_cache_type_string}_vep_${params.vep_cache_version}_GRCh38.tar.gz")
-    
+
     // Initialise channels
     ch_versions                  = Channel.empty()
     ch_general_files_to_download = Channel.empty()
-    ch_echtvar_encode_files      = Channel.empty() 
-    
+    ch_echtvar_encode_files      = Channel.empty()
+
     //
     // Download general files
     //
@@ -130,26 +140,26 @@ workflow NALLOREFS {
         WGET_GENERAL ( ch_general_files_to_download )
 
     }
-    
+
     //
     // Unzip/untar downloaded files
-    // 
-    
+    //
+
     GUNZIP (
         ch_reference_genome
     )
-    
+
     if(!params.skip_vep_cache) {
         UNTAR_VEP_CACHE (
             ch_vep_cache
         )
     }
-    
+
     //
     // Download CADD resources (200GB)
     //
     if(!params.skip_cadd_annotations) {
-        
+
         // Only executed if input file is remote
         WGET_CADD_ANNOTATIONS (
             ch_cadd_annotations.remote
@@ -158,7 +168,7 @@ workflow NALLOREFS {
         ch_cadd_annotations.local
             .mix(WGET_CADD_ANNOTATIONS.out.download)
             .set { ch_cadd_annotations_to_untar }
-        
+
         MD5SUM_CADD_ANNOTATIONS (
             ch_cadd_annotations_to_untar,
             false
@@ -173,7 +183,6 @@ workflow NALLOREFS {
         )
     }
 
-
     //
     // Download CADD indels
     //
@@ -182,12 +191,35 @@ workflow NALLOREFS {
             ch_cadd_indels.concat(ch_cadd_indels_tbi)
         )
     }
-    
+
+    //
+    // Local echtvar SNV databases
+    //
+    if (!params.skip_local_echtvar_databases) {
+
+        ch_echtvar_encode_files = ch_echtvar_encode_files
+            .mix(
+                ch_echtvar_local_databases
+            )
+
+        // To ensure local files are correct and not corrupted.
+        MD5SUM_LOCAL_ECTHVAR_DATABASES (
+            ch_echtvar_encode_files.map { meta, vcf, json -> [ meta, vcf ] },
+            false
+        )
+
+        assertChecksumChannel (
+            MD5SUM_LOCAL_ECTHVAR_DATABASES.out.checksum,
+            MD5SUM_LOCAL_ECTHVAR_DATABASES.out.checksum.map { meta, _checksum -> meta.md5sum }
+        )
+    }
+
+
     //
     // Download CADD SNVs and convert to echtvar zip
     //
     if (!params.skip_cadd_snvs) {
-        
+
         if(!params.cadd_snvs_echtvar_zip) {
             WGET_CADD_SNVS (
                 ch_cadd_snvs.remote
@@ -203,11 +235,11 @@ workflow NALLOREFS {
             )
 
             assertChecksum (MD5SUM_CADD_SNVS.out.checksum, params.cadd_snvs_md5sum)
-            
+
             // TODO: if echtvar-archive is provided, then just md5-sumcheck the echtvar file.
-            // This is because the CADD-file contains all possible variants in the genome, 
+            // This is because the CADD-file contains all possible variants in the genome,
             // therefore takes a really long time to go through...
-            
+
             CADD2VCF (
                 ch_cadd_snvs_to_convert
             )
@@ -222,7 +254,7 @@ workflow NALLOREFS {
             )
 
     }
-    
+
     //
     // Reformat ClinVar to reference genome and Scout compatibility
     // (1 -> chr1 & ID -> INFO/CLNVID, annotated via VEP)
@@ -233,14 +265,14 @@ workflow NALLOREFS {
             params.clinvar_md5sum,
             ch_vcfexpress_add_clnvid_prelude,
             ch_clinvar_rename_chrs
-        ) 
+        )
     }
 
     //
     // Download/Get GnomAD local files and strip info/convert
     //
     if(!params.skip_gnomad_snvs) {
-        
+
         GNOMAD_SNVS (
             ch_gnomad_snvs_per_chr.local,
             ch_gnomad_snvs_per_chr.remote
@@ -254,7 +286,7 @@ workflow NALLOREFS {
                 .map { vcf_meta, vcf, _json_meta, json -> [ vcf_meta, vcf, json ] }
             )
     }
-    
+
     //
     // Remove `CNV` SV-type, else SVDB will fail, e.g. https://github.com/nf-core/raredisease/issues/615
     //
@@ -263,32 +295,32 @@ workflow NALLOREFS {
         [],
         [],
         []
-    ) 
-    
+    )
+
     //
     // Echtvar SNV databases - GnomAD, CADD, CoLoRsDB
-    //  
-    
+    //
+
     ch_echtvar_encode_files = ch_echtvar_encode_files
         .mix(
             ch_colorsdb_snvs
                 .combine(ch_echtvar_encode_colorsdb_snvs_json)
                 .map { vcf_meta, vcf, _json_meta, json -> [ vcf_meta, vcf, json ] }
             )
-    
+
     ch_echtvar_encode_files
-        .multiMap { vcf_meta, vcf, json -> 
+        .multiMap { vcf_meta, vcf, json ->
             vcf:  [ vcf_meta, vcf ]
             json: [ vcf_meta, json ]
         }
         .set { ch_echtvar_encode_in }
-    
+
     ECHTVAR_ENCODE (
         ch_echtvar_encode_in.vcf,
         ch_echtvar_encode_in.json
     )
-    
-    // TODO: Could do a MD5-sum check of echtvar encode, 
+
+    // TODO: Could do a MD5-sum check of echtvar encode,
     // especially CADD SNVs if params.cadd_snvs_ecthvar_zip has been set
 
     //
@@ -335,7 +367,7 @@ def remoteLocalBranchedChannelOf(path) {
         .branch { meta, file_path ->
             remote: file_path.startsWith('https://')
                 return [ meta, file_path ] // return file_path as string
-            local: !file_path.startsWith('https://') 
+            local: !file_path.startsWith('https://')
                 return [ meta, file(file_path) ]
         }
 }

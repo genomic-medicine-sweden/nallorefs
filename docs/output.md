@@ -69,13 +69,13 @@ gnomad.v4.1.sv.sites.no_cnv.vcf.gz
 
 May be input with `--svdb_sv_databases` to nallo, as described [here](https://genomic-medicine-sweden.github.io/nallo/latest/usage/#sv-annotation).
 
-### Target regions 
+### Target regions
 
 ```
 grch38_chromosomes_split_at_centromeres_-v1.0-.bed
 ```
 
-May be input with `--target_regions`. 
+May be input with `--target_regions`.
 
 ### VEP files
 
@@ -87,7 +87,7 @@ grch38_vep_112_pli_values_-v1.0-.txt
 ```
 
 May be input to VEP with `--vep_plugin_files`, as described [here](https://genomic-medicine-sweden.github.io/nallo/latest/usage/#snv-annotation).
-If using `grch38_vep_112_loftool_scores_-v1.0-.txt` and `grch38_vep_112_pli_values_-v1.0-.txt` you probably need to update your config file for `ENSEMBLVEP_SNV` and `ÈNSEMBLVEP_SV`, becuase Nallo by default expects them to be named `pLI_values.txt` and `LoFtool_scores.txt`. You can find an example of this under the `vep_cache` section below. 
+If using `grch38_vep_112_loftool_scores_-v1.0-.txt` and `grch38_vep_112_pli_values_-v1.0-.txt` you probably need to update your config file for `ENSEMBLVEP_SNV` and `ÈNSEMBLVEP_SV`, becuase Nallo by default expects them to be named `pLI_values.txt` and `LoFtool_scores.txt`. You can find an example of this under the `vep_cache` section below.
 
 ### Reference fasta
 
@@ -125,6 +125,9 @@ grch38_reduced_penetrance_-v1.0-.tsv
 
 May be input to genmod with `--genmod_score_config_snvs`, `--genmod_score_config_svs` and `--genmod_reduced_penetrance`, as described [here](https://genomic-medicine-sweden.github.io/nallo/latest/usage/#rank-snvs-and-indels) and [here](https://genomic-medicine-sweden.github.io/nallo/latest/usage/#sv-annotation)
 
+> [!NOTE]
+The rank models downloaded with this pipeline currently assumes you are using a local [loqusdb](https://github.com/Clinical-Genomics/loqusdb) database. To run without this, remove the `[loqusdb]` entries in the rank models.
+
 ### Repeat calling files
 
 ```
@@ -155,7 +158,7 @@ prescored
 ```
 
 To give prescored CADD scores for small indels, input with `--cadd_prescored_indels` to nallo. Equivalent of `data/prescored/` folder described [here](https://github.com/kircherlab/CADD-scripts/#manual-installation).
- 
+
 ### Somalier sites
 
 ```

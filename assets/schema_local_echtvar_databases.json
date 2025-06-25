@@ -18,7 +18,7 @@
                     }
                 ],
                 "pattern": "^\\S+$",
-                "errorMessage": "version must be provided and cannot contain spaces",
+                "errorMessage": "Version can be provided and cannot contain spaces",
                 "meta": ["version"]
             },
             "vcf_path": {

@@ -198,28 +198,28 @@
             "type": "string"
         },
         "skip_general_files": {
-            "type": "string"
+            "type": "boolean"
         },
         "skip_vep_cache": {
-            "type": "string"
+            "type": "boolean"
         },
         "skip_cadd_annotations": {
-            "type": "string"
+            "type": "boolean"
         },
         "skip_cadd_indels": {
-            "type": "string"
+            "type": "boolean"
         },
         "skip_local_echtvar_databases": {
-            "type": "string"
+            "type": "boolean"
         },
         "skip_cadd_snvs": {
-            "type": "string"
+            "type": "boolean"
         },
         "skip_clinvar": {
-            "type": "string"
+            "type": "boolean"
         },
         "skip_gnomad_snvs": {
-            "type": "string"
+            "type": "boolean"
         }
     }
 }

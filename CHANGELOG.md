@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### `Fixed`
 
 - [#22](https://github.com/genomic-medicine-sweden/nallorefs/pull/22) - Fixed wrong path for stranger variant catalog
+- [#23](https://github.com/genomic-medicine-sweden/nallorefs/pull/23) - Fixed wrong types for the skip params
 
 ## 0.3.0 - [2025-06-25]
 

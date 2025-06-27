@@ -59,7 +59,7 @@ workflow NALLOREFS {
     ch_trgt_pathogenic_repeats   = downloadChannelOf(params.base_reference_dir + 'nallo/annotation/grch38_trgt_pathogenic_repeats.bed')
     ch_variant_consequences      = downloadChannelOf(params.base_reference_dir + 'nallo/annotation/grch38_variant_consequences_-v1.0-.txt')
     ch_somalier_sites            = downloadChannelOf(params.base_reference_dir + 'nallo/annotation/sites.hg38.vcf.gz')
-    ch_stranger_repeat_catalog   = downloadChannelOf('https://github.com/Clinical-Genomics/stranger/raw/84b97cf23ce522fa94d360612e7ed930789bb277/stranger/resources/variant_catalog_grch38.json')
+    ch_stranger_repeat_catalog   = downloadChannelOf(params.base_reference_dir + 'nallo/annotation/grch38_variant_catalog_stranger.json')
     ch_genmod_snvs_rank_model    = downloadChannelOf(params.base_reference_dir + 'nallo/rank_model/grch38_rank_model_snvs_-v1.0-.ini')
     ch_genmod_svs_rank_model     = downloadChannelOf(params.base_reference_dir + 'nallo/rank_model/grch38_rank_model_svs_-v1.0-.ini')
     ch_target_regions            = downloadChannelOf(params.base_reference_dir + 'nallo/region/grch38_chromosomes_split_at_centromeres_-v1.0-.bed') // Not really necessary

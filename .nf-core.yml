@@ -60,7 +60,7 @@ template:
   description: A Nexflow pipeline to download and create genomic-medicine-sweden/nallo
     references
   author: Felix Lenner
-  version: 0.3.1
+  version: 0.3.2
   force: true
   outdir: .
   skip_features:

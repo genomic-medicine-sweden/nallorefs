@@ -13,6 +13,7 @@ The directories listed and files below will be created in the results directory 
 ├── CoLoRSdb.GRCh38.v1.2.0.deepvariant.glnexus.vcf.gz.zip
 ├── CoLoRSdb.GRCh38.v1.2.0.pbsv.jasmine.vcf.gz
 ├── CoLoRSdb.GRCh38.v1.2.0.pbsv.jasmine.vcf.gz.tbi
+
 ├── gnomad_snvs.zip
 ├── gnomad.v4.1.sv.sites.no_cnv.vcf.gz
 ├── grch38_chromosomes_split_at_centromeres_-v1.0-.bed
@@ -204,12 +205,13 @@ process {
           '--merged'
         ].join(' ')
     }
-    withName: '.*:SNV_ANNOTATION:ENSEMBLVEP_SNV' {
+    withName: '.*:ANNOTATE_SNVS:ENSEMBLVEP_SNV' {
         ext.args = [
             '--dir_plugins .',
             '--plugin LoFtool,grch38_vep_112_loftool_scores_-v1.0-.txt',
             '--plugin pLI,grch38_vep_112_pli_values_-v1.0-.txt',
             '--plugin SpliceAI,snv=spliceai_scores.raw.snv.hg38.vcf.gz,indel=spliceai_scores.raw.indel.hg38.vcf.gz',
+            '--plugin dbNSFP,grch38_dbNSFP4.5a.gz,GERP++_RS,GERP++_NR,phyloP100way_vertebrate,phastCons100way_vertebrate,REVEL_rankscore,REVEL_score,rs_dbSNP150',
             '--distance 5000',
             '--buffer_size 20000',
             '--format vcf --max_sv_size 999999999',

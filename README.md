@@ -14,7 +14,7 @@
 
 **genomic-medicine-sweden/nallorefs** is a bioinformatics pipeline that downloads _most_ of a set of references that [genomic-medicine-sweden/nallo](https://github.com/genomic-medicine-sweden/nallo) can use (but is not limited to).
 
-For CADD-resources, CADD SNVs and GnomAD SNVs, these files are so large that while the pipeline may be able to download them, it might be better to download them manually. They can then be input into the pipeline with `--cadd_annotations`, `--cadd_snvs` and `--gnomad_base_path` (which should point to the directory where the gnomad chromosome VCFs are stored). The md5sum will be cheched, and they will be processed by the pipeline.
+For CADD-resources, CADD SNVs, GnomAD SNVs and dbNSFP, these files are so large that while the pipeline is able to download them, it might be better to download them manually. They can then be input into the pipeline with `--cadd_annotations`, `--cadd_snvs`, `--dbnsfp` and `--gnomad_base_path` (which should point to the directory where the gnomad chromosome VCFs are stored). The md5sum will be cheched, and they will be processed by the pipeline.
 
 These files can be downloaded with:
 ```
@@ -26,6 +26,8 @@ wget -c https://kircherlab.bihealth.org/download/CADD/v1.6/GRCh38/whole_genome_S
 mkdir -p gnomad
 cd gnomad
 echo {1..22} X Y | tr ' ' '\n' | xargs -d ' ' -n 1 -P 10 -I {} wget -c https://storage.googleapis.com/gcp-public-data--gnomad/release/4.1/vcf/genomes/gnomad.genomes.v4.1.sites.chr{}.vcf.bgz
+# Download dbNSFP
+wget https://usf.box.com/shared/static/2hzcx5s6p1xui7oen16xqzndfrkt8l9l -O dbNSFP4.5a.zip
 ```
 
 ##### Obtaining non-public reference files
@@ -50,6 +52,17 @@ The rank models downloaded with this pipeline currently assumes you are using a 
 <!-- TODO nf-core: Include a figure that guides the user through the major workflow steps. Many nf-core
      workflows use the "tube map" design for that. See https://nf-co.re/docs/contributing/design_guidelines#examples for examples.   -->
 <!-- TODO nf-core: Fill in short bullet-pointed list of the default steps in the pipeline -->
+
+##### Disclaimer
+
+This software includes functionality to automatically download or reference publicly available datasets, files, or resources (“External References”) from third-party sources. These External References may be subject to their own license terms and conditions, including academic, research-only, or commercial restrictions.
+
+The authors and maintainers of this software do not claim ownership or rights to any External References and do not redistribute them. The download functionality is provided solely for the user’s convenience, and it is the user’s responsibility to ensure that their use of any External References complies with all applicable license terms, institutional policies, and laws.
+
+By enabling or using the download functionality, you acknowledge that:
+- You are solely responsible for verifying and complying with the license terms of each downloaded dataset.
+- The maintainers of this software are not liable for any misuse, infringement, or non-compliance with third-party license terms.
+- You agree that this software is provided “as is” and without warranty of any kind, including but not limited to fitness for a particular purpose or legal compliance.
 
 ## Usage
 

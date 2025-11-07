@@ -8,7 +8,7 @@ Define where the pipeline should find input data and save output data.
 
 | Parameter | Description | Type | Default | Required | Hidden |
 |-----------|-----------|-----------|-----------|-----------|-----------|
-| `input` | Path to comma-separated file containing information about the samples in the experiment. <details><summary>Help</summary><small>You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row.</small></details>| `string` | /media/ssd_4tb/felix/projects/fellen31/nallo-refs/genomic-medicine-sweden-nallo-refs/assets/samplesheet.csv | True |  |
+| `input` | Path to comma-separated file containing information about the samples in the experiment. <details><summary>Help</summary><small>You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row.</small></details>| `string` | /home/felix/projects/genomic-medicine-sweden/nallorefs/assets/samplesheet.csv | True |  |
 | `outdir` | The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure. | `string` |  | True |  |
 
 ## Institutional config options
@@ -31,7 +31,7 @@ Less common options for the pipeline, typically set in a config file.
 | Parameter | Description | Type | Default | Required | Hidden |
 |-----------|-----------|-----------|-----------|-----------|-----------|
 | `version` | Display version and exit. | `boolean` |  |  | True |
-| `publish_dir_mode` | Method used to save pipeline results to output directory. <details><summary>Help</summary><small>The Nextflow `publishDir` option specifies which intermediate files should be saved to the output directory. This option tells the pipeline what method should be used to move these files. See [Nextflow docs](https://www.nextflow.io/docs/latest/process.html#publishdir) for details.</small></details>| `string` | copy |  | True |
+| `publish_dir_mode` | Method used to save pipeline results to output directory. (accepted: `symlink`\|`rellink`\|`link`\|`copy`\|`copyNoFollow`\|`move`) <details><summary>Help</summary><small>The Nextflow `publishDir` option specifies which intermediate files should be saved to the output directory. This option tells the pipeline what method should be used to move these files. See [Nextflow docs](https://www.nextflow.io/docs/latest/process.html#publishdir) for details.</small></details>| `string` | copy |  | True |
 | `monochrome_logs` | Do not use coloured log outputs. | `boolean` |  |  | True |
 | `validate_params` | Boolean whether to validate parameters against the schema at runtime | `boolean` | True |  | True |
 | `pipelines_testdata_base_path` | Base URL or local path to location of pipeline test dataset files | `string` | https://raw.githubusercontent.com/nf-core/test-datasets/ |  | True |
@@ -41,7 +41,7 @@ Less common options for the pipeline, typically set in a config file.
 
 | Parameter | Description | Type | Default | Required | Hidden |
 |-----------|-----------|-----------|-----------|-----------|-----------|
-| `base_reference_dir` |  | `string` | https://github.com/Clinical-Genomics/reference-files/raw/b91a412f726bad0003846bc3b3127d0d8d6997ac/ |  |  |
+| `base_reference_dir` |  | `string` | https://github.com/Clinical-Genomics/reference-files/raw/383062271c05fd23481867359817179333d2f626/ |  |  |
 | `clinvar_version` |  | `integer` | 20250217 |  |  |
 | `clinvar` |  | `string` | https://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/weekly/clinvar_20250217.vcf.gz |  |  |
 | `clinvar_md5sum` |  | `string` | 9956fd8275a94f7e32aa283edd8bb172 |  |  |
@@ -53,3 +53,17 @@ Less common options for the pipeline, typically set in a config file.
 | `cadd_snvs_md5sum` |  | `string` | faaa80ef3948cf44e56a3629a90cdaaa |  |  |
 | `gnomad_version` |  | `number` | 4.1 |  |  |
 | `gnomad_base_path` |  | `string` | https://storage.googleapis.com/gcp-public-data--gnomad/release/4.1/vcf/genomes/ |  |  |
+| `local_echtvar_databases` |  | `string` |  |  |  |
+| `cadd_snvs_echtvar_zip` |  | `string` |  |  |  |
+| `skip_general_files` |  | `boolean` |  |  |  |
+| `skip_vep_cache` |  | `boolean` |  |  |  |
+| `skip_cadd_annotations` |  | `boolean` |  |  |  |
+| `skip_cadd_indels` |  | `boolean` |  |  |  |
+| `skip_local_echtvar_databases` |  | `boolean` |  |  |  |
+| `skip_cadd_snvs` |  | `boolean` |  |  |  |
+| `skip_clinvar` |  | `boolean` |  |  |  |
+| `skip_gnomad_snvs` |  | `boolean` |  |  |  |
+| `dbnsfp` |  | `string` | https://usf.box.com/shared/static/2hzcx5s6p1xui7oen16xqzndfrkt8l9l |  |  |
+| `dbnsfp_md5sum` |  | `string` | 7e01ebb7a4dcb679b9b93b30c7ba131e |  |  |
+| `dbnsfp_version` |  | `string` | 4.5a |  |  |
+| `skip_dbnsfp` |  | `boolean` |  |  |  |

@@ -23,17 +23,34 @@ process GUNZIP_REMOVE_HEADER_SORT_DBNSFP {
     def name = archive.toString() - '.gz' - ".${extension}"
     def prefix = task.ext.prefix ?: name
     gunzip = prefix + ".${extension}"
+
+    // Removes header (tail -n +2), selects specific columns (cut -f ...),
+    // 1 #chr
+    // 2 pos(1-based)
+    // 3 ref
+    // 4 alt
+    // 5 aaref
+    // 6 aaalt
+    // 7 rs_dbSNP
+    // 83 REVEL_score
+    // 84 REVEL_rankscore
+    // 184 GERP++_NR
+    // 185 GERP++_RS
+    // 187 phyloP100way_vertebrate
+    // 193 phastCons100way_vertebrate
+    // sorts by chrom and pos (sort -k1,1 -k2,2n)
+    // to match expected order for dbNSFP usage with VEP
     """
     # Not calling gunzip itself because it creates files
     # with the original group ownership rather than the
     # default one for that user / the work directory
-
 
     gzip \\
         -cd \\
         ${args} \\
         ${archive} | \\
         tail -n +2 | \\
+        cut -f 1,2,3,4,5,6,7,83,84,184,185,187,193 \||
         sort -k1,1 -k2,2n | \\
         > ${gunzip}
 

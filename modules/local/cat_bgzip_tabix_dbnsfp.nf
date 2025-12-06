@@ -46,11 +46,11 @@ process CAT_BGZIP_TABIX_DBNSFP {
         dbNSFP${version}_variant.chr7 \\
         dbNSFP${version}_variant.chr8 \\
         dbNSFP${version}_variant.chr9 \\
+        dbNSFP${version}_variant.chrM \\
         dbNSFP${version}_variant.chrX \\
         dbNSFP${version}_variant.chrY |\\
-        sort -k1,1 -k2,2n |\\
         bgzip -c > grch38_dbNSFP${version}.gz
-    
+
     tabix -s 1 -b 2 -e 2 grch38_dbNSFP${version}.gz
 
     cat <<-END_VERSIONS > versions.yml

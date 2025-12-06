@@ -1,4 +1,4 @@
-process GUNZIP_REMOVE_HEADER_DBNSFP {
+process GUNZIP_REMOVE_HEADER_SORT_DBNSFP {
     tag "${archive}"
     label 'process_single'
 
@@ -23,40 +23,18 @@ process GUNZIP_REMOVE_HEADER_DBNSFP {
     def name = archive.toString() - '.gz' - ".${extension}"
     def prefix = task.ext.prefix ?: name
     gunzip = prefix + ".${extension}"
-
-    //#gunzip ${archive} | head -n 1 > header || true
-    //#cols=\$(awk -v FS='\t' '
-    //#NR==1 {
-    //#                while ((getline field < "fields.txt") > 0) fields[field]=1;
-    //#                        for(i=1;i<=NF;i++) if($i in fields) printf i","
-    //#                                }' header | sed 's/,\$//')
-
-    //#cut -f "$cols" - > "${gunzip}"
-    
-    //cat <<EOF > fields.txt
-    //#chr
-    //pos(1-based)
-    //aaref
-    //aaalt
-    //GERP++_RS
-    //GERP++_NR
-    //phyloP100way_vertebrate
-    //phastCons100way_vertebrate
-    //REVEL_rankscore
-    //REVEL_score
-    //rs_dbSNP150
-    //EOF
     """
     # Not calling gunzip itself because it creates files
     # with the original group ownership rather than the
     # default one for that user / the work directory
-    
-    
+
+
     gzip \\
         -cd \\
         ${args} \\
-        ${archive} |\\
-        tail -n +2 \\
+        ${archive} | \\
+        tail -n +2 | \\
+        sort -k1,1 -k2,2n | \\
         > ${gunzip}
 
     cat <<-END_VERSIONS > versions.yml

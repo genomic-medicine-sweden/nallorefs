@@ -5,10 +5,11 @@ include { samplesheetToList } from 'plugin/nf-schema'
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 include { CADD2VCF                                                   } from '../modules/local/cadd2vcf.nf'
+include { CAT_BGZIP_TABIX_DBNSFP                                     } from '../modules/local/cat_bgzip_tabix_dbnsfp.nf'
 include { CLINVAR                                                    } from '../subworkflows/local/clinvar/main'
 include { GNOMAD_SNVS                                                } from '../subworkflows/local/gnomad_snvs/main'
 include { GUNZIP                                                     } from '../modules/nf-core/gunzip/'
-include { GUNZIP_REMOVE_HEADER_DBNSFP                                } from '../modules/local/gunzip_remove_header_dbnsfp.nf'
+include { GUNZIP_REMOVE_HEADER_SORT_DBNSFP                           } from '../modules/local/gunzip_remove_header_sort_dbnsfp.nf'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_CADD_SNVS                   } from '../modules/nf-core/bcftools/view/'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_GNOMAD_SVS                  } from '../modules/nf-core/bcftools/view/'
 include { ECHTVAR_ENCODE                                             } from '../modules/local/echtvar/encode/'
@@ -17,7 +18,6 @@ include { MD5SUM as MD5SUM_CADD_SNVS                                 } from '../
 include { MD5SUM as MD5SUM_DBNSFP                                    } from '../modules/nf-core/md5sum/main'
 include { MD5SUM as MD5SUM_LOCAL_ECTHVAR_DATABASES                   } from '../modules/nf-core/md5sum/main'
 include { MD5SUM as MD5SUM_LOCAL_SVDB_DATABASES                      } from '../modules/nf-core/md5sum/main'
-include { PROCESS_DBNSFP                                             } from '../modules/local/process_dbnsfp.nf'
 include { UNTAR as UNTAR_VEP_CACHE                                   } from '../modules/nf-core/untar/main'
 include { UNTAR as UNTAR_CADD_ANNOTATIONS                            } from '../modules/nf-core/untar/main'
 include { UNZIP                                                      } from '../modules/nf-core/unzip/main'
@@ -242,17 +242,15 @@ workflow NALLOREFS {
 
         assertChecksum (MD5SUM_DBNSFP.out.checksum, params.dbnsfp_md5sum)
 
-        GUNZIP_REMOVE_HEADER_DBNSFP (
+        GUNZIP_REMOVE_HEADER_SORT_DBNSFP (
             UNZIP.out.unzipped_archive
                 .filter { file ->
-                    file.name ==~ "dbNSFP${params.dbnsfp_version}_variant\\.chr[0-9XY]+\\.gz"
+                    file.name ==~ "dbNSFP${params.dbnsfp_version}_variant\\.chr[0-9MXY]+\\.gz"
                 }
-                .view()
         )
 
-        PROCESS_DBNSFP (
-            UNZIP.out.unzipped_archive,
-            params.dbnsfp_version
+        CAT_BGZIP_TABIX_DBNSFP (
+            GUNZIP_REMOVE_HEADER_SORT_DBNSFP.out.gunzip.groupTuple()
         )
 
     }

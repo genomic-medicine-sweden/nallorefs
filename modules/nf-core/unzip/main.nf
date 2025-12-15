@@ -4,8 +4,8 @@ process UNZIP {
 
     conda "${moduleDir}/environment.yml"
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
-        'https://depot.galaxyproject.org/singularity/p7zip:16.02' :
-        'biocontainers/p7zip:16.02' }"
+        'https://depot.galaxyproject.org/singularity/p7zip:15.09--h2d50403_4' :
+        'biocontainers/p7zip:15.09--h2d50403_4' }"
 
     input:
     tuple val(meta), path(archive)

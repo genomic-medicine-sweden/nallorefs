@@ -13,6 +13,7 @@ include { GUNZIP_REMOVE_HEADER_SORT_DBNSFP                           } from '../
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_CADD_SNVS                   } from '../modules/nf-core/bcftools/view/'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_GNOMAD_SVS                  } from '../modules/nf-core/bcftools/view/'
 include { ECHTVAR_ENCODE                                             } from '../modules/local/echtvar/encode/'
+include { EXTRACT_HEADER_DBNSFP                                      } from '../modules/local/extract_header_dbnsfp.nf'
 include { MD5SUM as MD5SUM_CADD_ANNOTATIONS                          } from '../modules/nf-core/md5sum/main'
 include { MD5SUM as MD5SUM_CADD_SNVS                                 } from '../modules/nf-core/md5sum/main'
 include { MD5SUM as MD5SUM_DBNSFP                                    } from '../modules/nf-core/md5sum/main'
@@ -241,16 +242,34 @@ workflow NALLOREFS {
         )
 
         assertChecksum (MD5SUM_DBNSFP.out.checksum, params.dbnsfp_md5sum)
+        
+        EXTRACT_HEADER_DBNSFP(
+            UNZIP.out.unzipped_archive
+                .transpose()
+                .filter { meta, file ->
+                    file.name ==~ "dbNSFP${params.dbnsfp_version}_variant\\.chr22+\\.gz"
+                }
+        ) 
 
         GUNZIP_REMOVE_HEADER_SORT_DBNSFP (
             UNZIP.out.unzipped_archive
-                .filter { file ->
+                .transpose()
+                .filter { meta, file ->
                     file.name ==~ "dbNSFP${params.dbnsfp_version}_variant\\.chr[0-9MXY]+\\.gz"
                 }
         )
+    
 
         CAT_BGZIP_TABIX_DBNSFP (
-            GUNZIP_REMOVE_HEADER_SORT_DBNSFP.out.gunzip.groupTuple()
+            EXTRACT_HEADER_DBNSFP.out.gunzip.view()
+                .concat(
+                    GUNZIP_REMOVE_HEADER_SORT_DBNSFP.out.gunzip
+                )
+                .groupTuple()
+                .view()
+
+                ,
+            params.dbnsfp_version
         )
 
     }

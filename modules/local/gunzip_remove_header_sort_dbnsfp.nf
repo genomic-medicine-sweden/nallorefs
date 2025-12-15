@@ -40,6 +40,7 @@ process GUNZIP_REMOVE_HEADER_SORT_DBNSFP {
     // 193 phastCons100way_vertebrate
     // sorts by chrom and pos (sort -k1,1 -k2,2n)
     // to match expected order for dbNSFP usage with VEP
+    // Needs to match the fields set in EXTRACT_HEADER_DBNSFP
     """
     # Not calling gunzip itself because it creates files
     # with the original group ownership rather than the
@@ -50,8 +51,8 @@ process GUNZIP_REMOVE_HEADER_SORT_DBNSFP {
         ${args} \\
         ${archive} | \\
         tail -n +2 | \\
-        cut -f 1,2,3,4,5,6,7,83,84,184,185,187,193 \||
-        sort -k1,1 -k2,2n | \\
+        cut -f 1,2,3,4,5,6,7,83,84,184,185,187,193 | \\
+        sort -k1,1 -k2,2n \\
         > ${gunzip}
 
     cat <<-END_VERSIONS > versions.yml

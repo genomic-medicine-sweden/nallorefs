@@ -13,12 +13,13 @@ The directories listed and files below will be created in the results directory 
 ├── CoLoRSdb.GRCh38.v1.2.0.deepvariant.glnexus.vcf.gz.zip
 ├── CoLoRSdb.GRCh38.v1.2.0.pbsv.jasmine.vcf.gz
 ├── CoLoRSdb.GRCh38.v1.2.0.pbsv.jasmine.vcf.gz.tbi
-
 ├── gnomad_snvs.zip
 ├── gnomad.v4.1.sv.sites.no_cnv.vcf.gz
 ├── grch38_chromosomes_split_at_centromeres_-v1.0-.bed
 ├── grch38_clinvar_20250217_renamed_reformatted.vcf.gz
 ├── grch38_clinvar_20250217_renamed_reformatted.vcf.gz.tbi
+├── grch38_dbNSFP4.5a.gz
+├── grch38_dbNSFP4.5a.gz.tbi
 ├── GRCh38_GIABv3_no_alt_analysis_set_maskedGRC_decoys_MAP2K3_KMT2C_KCNJ18.fasta
 ├── grch38_hificnv_excluded_regions_common_50_-v1.0-.bed.gz
 ├── grch38_hificnv_expected_copynumer_xx_-v1.0-.bed

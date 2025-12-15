@@ -242,15 +242,17 @@ workflow NALLOREFS {
         )
 
         assertChecksum (MD5SUM_DBNSFP.out.checksum, params.dbnsfp_md5sum)
-        
+
+        // Extract header from chr22
         EXTRACT_HEADER_DBNSFP(
             UNZIP.out.unzipped_archive
                 .transpose()
                 .filter { meta, file ->
                     file.name ==~ "dbNSFP${params.dbnsfp_version}_variant\\.chr22+\\.gz"
                 }
-        ) 
+        )
 
+        // Remove header, get relevant fields and sort all other chromosomes
         GUNZIP_REMOVE_HEADER_SORT_DBNSFP (
             UNZIP.out.unzipped_archive
                 .transpose()
@@ -258,22 +260,16 @@ workflow NALLOREFS {
                     file.name ==~ "dbNSFP${params.dbnsfp_version}_variant\\.chr[0-9MXY]+\\.gz"
                 }
         )
-    
 
+        // Concatenate header and all chromosomes, bgzip and tabix index
         CAT_BGZIP_TABIX_DBNSFP (
-            EXTRACT_HEADER_DBNSFP.out.gunzip.view()
-                .concat(
-                    GUNZIP_REMOVE_HEADER_SORT_DBNSFP.out.gunzip
-                )
-                .groupTuple()
-                .view()
-
-                ,
+            EXTRACT_HEADER_DBNSFP.out.gunzip
+                .concat(GUNZIP_REMOVE_HEADER_SORT_DBNSFP.out.gunzip)
+                .groupTuple(),
             params.dbnsfp_version
         )
 
     }
-
 
     //
     // Download CADD SNVs and convert to echtvar zip

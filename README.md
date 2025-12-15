@@ -14,7 +14,7 @@
 
 **genomic-medicine-sweden/nallorefs** is a bioinformatics pipeline that downloads _most_ of a set of references that [genomic-medicine-sweden/nallo](https://github.com/genomic-medicine-sweden/nallo) can use (but is not limited to).
 
-For CADD-resources, CADD SNVs, GnomAD SNVs and dbNSFP, these files are so large that while the pipeline is able to download them, it might be better to download them manually. They can then be input into the pipeline with `--cadd_annotations`, `--cadd_snvs`, `--dbnsfp` and `--gnomad_base_path` (which should point to the directory where the gnomad chromosome VCFs are stored). The md5sum will be cheched, and they will be processed by the pipeline.
+For CADD-resources, CADD SNVs, GnomAD SNVs and dbNSFP, these files are so large that while the pipeline is able to download them, it might be better to download them manually. They can then be input into the pipeline with `--cadd_annotations`, `--cadd_snvs`, `--dbnsfp` and `--gnomad_base_path` (which should point to the directory where the gnomad chromosome VCFs are stored). The md5sum will be checked, and they will be processed by the pipeline.
 
 These files can be downloaded with:
 ```

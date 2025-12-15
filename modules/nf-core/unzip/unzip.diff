@@ -3,7 +3,16 @@ Changes in component 'nf-core/unzip'
 Changes in 'unzip/main.nf':
 --- modules/nf-core/unzip/main.nf
 +++ modules/nf-core/unzip/main.nf
-@@ -11,8 +11,8 @@
+@@ -4,15 +4,15 @@
+ 
+     conda "${moduleDir}/environment.yml"
+     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+-        'https://depot.galaxyproject.org/singularity/p7zip:16.02' :
+-        'biocontainers/p7zip:16.02' }"
++        'https://depot.galaxyproject.org/singularity/p7zip:15.09--h2d50403_4' :
++        'biocontainers/p7zip:15.09--h2d50403_4' }"
+ 
+     input:
      tuple val(meta), path(archive)
  
      output:
@@ -21,7 +30,7 @@ Changes in 'unzip/main.nf':
 -    7za \\
 -        x \\
 -        -o"${prefix}"/ \\
-+    gunzip \\
++    unzip \\
          $args \\
          $archive
  

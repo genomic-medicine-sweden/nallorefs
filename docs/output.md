@@ -212,7 +212,7 @@ process {
             '--plugin LoFtool,grch38_vep_112_loftool_scores_-v1.0-.txt',
             '--plugin pLI,grch38_vep_112_pli_values_-v1.0-.txt',
             '--plugin SpliceAI,snv=spliceai_scores.raw.snv.hg38.vcf.gz,indel=spliceai_scores.raw.indel.hg38.vcf.gz',
-            '--plugin dbNSFP,grch38_dbNSFP4.5a.gz,GERP++_RS,GERP++_NR,phyloP100way_vertebrate,phastCons100way_vertebrate,REVEL_rankscore,REVEL_score,rs_dbSNP150',
+            '--plugin dbNSFP,grch38_dbNSFP4.5a.gz,transcript_match=1,GERP++_RS,GERP++_NR,phyloP100way_vertebrate,phastCons100way_vertebrate,REVEL_rankscore,REVEL_score,rs_dbSNP150',
             '--distance 5000',
             '--buffer_size 20000',
             '--format vcf --max_sv_size 999999999',

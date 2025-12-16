@@ -23,7 +23,7 @@ process EXTRACT_HEADER_DBNSFP {
     def name = archive.toString() - '.gz' - ".${extension}"
     def prefix = task.ext.prefix ?: name
     gunzip = prefix
-    
+
     // cut fields needs to match those set in GUNZIP_REMOVE_HEADER_SORT_DBNSFP
     """
     # Not calling gunzip itself because it creates files
@@ -35,7 +35,7 @@ process EXTRACT_HEADER_DBNSFP {
         ${args} \\
         ${archive} |\\
         head -n 1 |\\
-        cut -f 1,2,3,4,5,6,7,83,84,184,185,187,193 \\
+        cut -f 1,2,3,4,5,6,7,15,83,84,184,185,187,193 \\
         > ${gunzip} || true
 
     cat <<-END_VERSIONS > versions.yml

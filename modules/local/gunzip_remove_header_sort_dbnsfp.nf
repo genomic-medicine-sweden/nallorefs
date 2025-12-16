@@ -32,6 +32,7 @@ process GUNZIP_REMOVE_HEADER_SORT_DBNSFP {
     // 5 aaref
     // 6 aaalt
     // 7 rs_dbSNP
+    // 15 Ensembl_transcriptid
     // 83 REVEL_score
     // 84 REVEL_rankscore
     // 184 GERP++_NR
@@ -51,7 +52,7 @@ process GUNZIP_REMOVE_HEADER_SORT_DBNSFP {
         ${args} \\
         ${archive} | \\
         tail -n +2 | \\
-        cut -f 1,2,3,4,5,6,7,83,84,184,185,187,193 | \\
+        cut -f 1,2,3,4,5,6,7,15,83,84,184,185,187,193 | \\
         sort -k1,1 -k2,2n \\
         > ${gunzip}
 

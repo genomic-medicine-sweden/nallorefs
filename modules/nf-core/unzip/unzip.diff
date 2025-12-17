@@ -1,0 +1,41 @@
+Changes in component 'nf-core/unzip'
+'modules/nf-core/unzip/environment.yml' is unchanged
+Changes in 'unzip/main.nf':
+--- modules/nf-core/unzip/main.nf
++++ modules/nf-core/unzip/main.nf
+@@ -4,15 +4,15 @@
+ 
+     conda "${moduleDir}/environment.yml"
+     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+-        'https://depot.galaxyproject.org/singularity/p7zip:16.02' :
+-        'biocontainers/p7zip:16.02' }"
++        'https://depot.galaxyproject.org/singularity/p7zip:15.09--h2d50403_4' :
++        'biocontainers/p7zip:15.09--h2d50403_4' }"
+ 
+     input:
+     tuple val(meta), path(archive)
+ 
+     output:
+-    tuple val(meta), path("${prefix}/"), emit: unzipped_archive
+-    path "versions.yml"                , emit: versions
++    tuple val(meta), path("*"), emit: unzipped_archive
++    path "versions.yml"       , emit: versions
+ 
+     when:
+     task.ext.when == null || task.ext.when
+@@ -22,9 +22,7 @@
+     if ( archive instanceof List && archive.name.size > 1 ) { error "[UNZIP] error: 7za only accepts a single archive as input. Please check module input." }
+     prefix = task.ext.prefix ?: ( meta.id ? "${meta.id}" : archive.baseName)
+     """
+-    7za \\
+-        x \\
+-        -o"${prefix}"/ \\
++    unzip \\
+         $args \\
+         $archive
+ 
+
+'modules/nf-core/unzip/meta.yml' is unchanged
+'modules/nf-core/unzip/tests/main.nf.test.snap' is unchanged
+'modules/nf-core/unzip/tests/main.nf.test' is unchanged
+************************************************************

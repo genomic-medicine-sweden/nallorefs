@@ -145,7 +145,7 @@
     "properties": {
         "base_reference_dir": {
             "type": "string",
-            "default": "https://github.com/Clinical-Genomics/reference-files/raw/0b598874732bce84c414e1305b83c3e6b90ab7a6/"
+            "default": "https://github.com/Clinical-Genomics/reference-files/raw/383062271c05fd23481867359817179333d2f626/"
         },
         "clinvar_version": {
             "type": "integer",
@@ -219,6 +219,21 @@
             "type": "boolean"
         },
         "skip_gnomad_snvs": {
+            "type": "boolean"
+        },
+        "dbnsfp": {
+            "type": "string",
+            "default": "https://usf.box.com/shared/static/2hzcx5s6p1xui7oen16xqzndfrkt8l9l"
+        },
+        "dbnsfp_md5sum": {
+            "type": "string",
+            "default": "7e01ebb7a4dcb679b9b93b30c7ba131e"
+        },
+        "dbnsfp_version": {
+            "type": "string",
+            "default": "4.5a"
+        },
+        "skip_dbnsfp": {
             "type": "boolean"
         }
     }

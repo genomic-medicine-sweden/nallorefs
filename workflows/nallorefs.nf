@@ -5,21 +5,27 @@ include { samplesheetToList } from 'plugin/nf-schema'
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 include { CADD2VCF                                                   } from '../modules/local/cadd2vcf.nf'
+include { CAT_BGZIP_TABIX_DBNSFP                                     } from '../modules/local/cat_bgzip_tabix_dbnsfp.nf'
 include { CLINVAR                                                    } from '../subworkflows/local/clinvar/main'
 include { GNOMAD_SNVS                                                } from '../subworkflows/local/gnomad_snvs/main'
 include { GUNZIP                                                     } from '../modules/nf-core/gunzip/'
+include { GUNZIP_REMOVE_HEADER_SORT_DBNSFP                           } from '../modules/local/gunzip_remove_header_sort_dbnsfp.nf'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_CADD_SNVS                   } from '../modules/nf-core/bcftools/view/'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_GNOMAD_SVS                  } from '../modules/nf-core/bcftools/view/'
 include { ECHTVAR_ENCODE                                             } from '../modules/local/echtvar/encode/'
+include { EXTRACT_HEADER_DBNSFP                                      } from '../modules/local/extract_header_dbnsfp.nf'
 include { MD5SUM as MD5SUM_CADD_ANNOTATIONS                          } from '../modules/nf-core/md5sum/main'
 include { MD5SUM as MD5SUM_CADD_SNVS                                 } from '../modules/nf-core/md5sum/main'
+include { MD5SUM as MD5SUM_DBNSFP                                    } from '../modules/nf-core/md5sum/main'
 include { MD5SUM as MD5SUM_LOCAL_ECTHVAR_DATABASES                   } from '../modules/nf-core/md5sum/main'
 include { MD5SUM as MD5SUM_LOCAL_SVDB_DATABASES                      } from '../modules/nf-core/md5sum/main'
 include { UNTAR as UNTAR_VEP_CACHE                                   } from '../modules/nf-core/untar/main'
 include { UNTAR as UNTAR_CADD_ANNOTATIONS                            } from '../modules/nf-core/untar/main'
+include { UNZIP                                                      } from '../modules/nf-core/unzip/main'
 include { WGET as WGET_CADD_ANNOTATIONS                              } from '../modules/local/wget/'
 include { WGET as WGET_CADD_INDELS                                   } from '../modules/local/wget/'
 include { WGET as WGET_CADD_SNVS                                     } from '../modules/local/wget/'
+include { WGET as WGET_DBNSFP                                        } from '../modules/local/wget/'
 include { WGET as WGET_GENERAL                                       } from '../modules/local/wget/'
 include { WGET as WGET_VEP_PLUGIN_FILES                              } from '../modules/local/wget/'
 include { WGET as WGET_LOCAL_SVDB_DATABASES                          } from '../modules/local/wget/'
@@ -88,6 +94,8 @@ workflow NALLOREFS {
     ch_echtvar_encode_colorsdb_snvs_json = fileChannelOf("${projectDir}/assets/echtvar_encode_colorsdb_snvs.json") // TODO: move to reference-files?
     // CoLoRSdb SVs - could think of renaming these, or storing in a separate location
     ch_colorsdb_svs_vcf                  = downloadChannelOf('https://zenodo.org/records/14814308/files/CoLoRSdb.GRCh38.v1.2.0.pbsv.jasmine.vcf.gz')
+    // dbNSFP. Either download and checksum remote file, or just checksum local.
+    ch_dbnsfp                            = remoteLocalBranchedChannelOf(params.dbnsfp)
     // GnomAD SVs
     ch_gnomad_svs_vcf                    = fileChannelOf("https://storage.googleapis.com/gcp-public-data--gnomad/release/4.1/genome_sv/gnomad.v4.1.sv.sites.vcf.gz")
     // GnomAD SNVs
@@ -214,6 +222,54 @@ workflow NALLOREFS {
         )
     }
 
+    if (!params.skip_dbnsfp) {
+
+        WGET_DBNSFP (
+            ch_dbnsfp.remote
+        )
+
+        ch_dbnsfp.local
+            .mix(WGET_DBNSFP.out.download)
+            .set { ch_dbnsfp_to_unzip }
+
+        UNZIP (
+            ch_dbnsfp_to_unzip
+        )
+
+        MD5SUM_DBNSFP (
+            ch_dbnsfp_to_unzip,
+            false
+        )
+
+        assertChecksum (MD5SUM_DBNSFP.out.checksum, params.dbnsfp_md5sum)
+
+        // Extract header from chr22
+        EXTRACT_HEADER_DBNSFP(
+            UNZIP.out.unzipped_archive
+                .transpose()
+                .filter { meta, file ->
+                    file.name ==~ "dbNSFP${params.dbnsfp_version}_variant\\.chr22+\\.gz"
+                }
+        )
+
+        // Remove header, get relevant fields and sort all other chromosomes
+        GUNZIP_REMOVE_HEADER_SORT_DBNSFP (
+            UNZIP.out.unzipped_archive
+                .transpose()
+                .filter { meta, file ->
+                    file.name ==~ "dbNSFP${params.dbnsfp_version}_variant\\.chr[0-9MXY]+\\.gz"
+                }
+        )
+
+        // Concatenate header and all chromosomes, bgzip and tabix index
+        CAT_BGZIP_TABIX_DBNSFP (
+            EXTRACT_HEADER_DBNSFP.out.gunzip
+                .concat(GUNZIP_REMOVE_HEADER_SORT_DBNSFP.out.gunzip)
+                .groupTuple(),
+            params.dbnsfp_version
+        )
+
+    }
 
     //
     // Download CADD SNVs and convert to echtvar zip

@@ -188,7 +188,6 @@ Contains merged vep cache input with `--vep_cache`, as described [here](https://
 The config could for example look like this:
 
 ```
-process {
     withName: '.*:ANNOTATE_SVS:ENSEMBLVEP_SV' {
         ext.args = [
           '--dir_plugins .',
@@ -223,10 +222,9 @@ process {
             '--uniprot --vcf',
             '--no_stats',
             '--merged',
-            '--custom grch38_clinvar_20250217_renamed_reformatted.vcf.gz,CLINVAR,vcf,exact,0,CLNSIG,CLNVID,CLNREVSTAT'
+            '--custom grch38_clinvar_20251215_renamed_reformatted.vcf.gz,CLINVAR,vcf,exact,0,CLNSIG,CLNVID,CLNREVSTAT'
         ].join(' ')
     }
-}
 ```
 
 ### Pipeline information

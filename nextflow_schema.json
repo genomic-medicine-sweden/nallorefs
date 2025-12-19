@@ -143,21 +143,25 @@
         }
     ],
     "properties": {
+        "base_reference_version": {
+            "type": "string",
+            "default": "383062271c05fd23481867359817179333d2f626"
+        },
         "base_reference_dir": {
             "type": "string",
             "default": "https://github.com/Clinical-Genomics/reference-files/raw/383062271c05fd23481867359817179333d2f626/"
         },
         "clinvar_version": {
             "type": "integer",
-            "default": 20250217
+            "default": 20251215
         },
         "clinvar": {
             "type": "string",
-            "default": "https://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/weekly/clinvar_20250217.vcf.gz"
+            "default": "https://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/weekly/clinvar_20251215.vcf.gz"
         },
         "clinvar_md5sum": {
             "type": "string",
-            "default": "9956fd8275a94f7e32aa283edd8bb172"
+            "default": "8569c7ded09f17d4704caee5ebb263cd"
         },
         "vep_cache_version": {
             "type": "integer",

@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## unreleased - [XXXX-XX-XX]
 
 - [#26](https://github.com/genomic-medicine-sweden/nallorefs/pull/26) - Added dbNSFP
+- [#29](https://github.com/genomic-medicine-sweden/nallorefs/pull/29) - Updated ClinVar version
+- [#29](https://github.com/genomic-medicine-sweden/nallorefs/pull/29) - Split `base_reference_dir` into `base_reference_dir` and `base_reference_version` for easier testing of new reference-files branches
 
 ## 0.3.2 - [2025-08-18]
 

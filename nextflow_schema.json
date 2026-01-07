@@ -145,7 +145,7 @@
     "properties": {
         "base_reference_version": {
             "type": "string",
-            "default": "383062271c05fd23481867359817179333d2f626"
+            "default": "0cd376caa80dd25d4af6ee52155044aeb0aeeee1"
         },
         "base_reference_dir": {
             "type": "string",

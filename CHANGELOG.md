@@ -3,11 +3,12 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## unreleased - [XXXX-XX-XX]
+## 0.4.0 - [2026-01-08]
 
 - [#26](https://github.com/genomic-medicine-sweden/nallorefs/pull/26) - Added dbNSFP
 - [#29](https://github.com/genomic-medicine-sweden/nallorefs/pull/29) - Updated ClinVar version
 - [#29](https://github.com/genomic-medicine-sweden/nallorefs/pull/29) - Split `base_reference_dir` into `base_reference_dir` and `base_reference_version` for easier testing of new reference-files branches
+- [#30](https://github.com/genomic-medicine-sweden/nallorefs/pull/30) - Updated rank model and repeat definitions
 
 ## 0.3.2 - [2025-08-18]
 

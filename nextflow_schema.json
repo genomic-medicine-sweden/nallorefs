@@ -237,6 +237,10 @@
             "type": "string",
             "default": "4.5a"
         },
+        "strdrop_training_set_version": {
+            "type": "integer",
+            "default": 260120
+        },
         "skip_dbnsfp": {
             "type": "boolean"
         }

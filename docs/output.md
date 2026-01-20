@@ -28,7 +28,7 @@ The directories listed and files below will be created in the results directory 
 ├── grch38_rank_model_snvs_-v1.0-.ini
 ├── grch38_rank_model_svs_-v1.0-.ini
 ├── grch38_reduced_penetrance_-v1.0-.tsv
-├── grch38_strdrop_training_set_260108.json
+├── grch38_strdrop_training_set_260120.json
 ├── grch38_trgt_pathogenic_repeats.bed
 ├── grch38_variant_consequences_-v1.0-.txt
 ├── grch38_vep_112_loftool_scores_-v1.0-.txt
@@ -141,8 +141,9 @@ May be input to TRGT with `--trgt_repeats` as described [here](https://genomic-m
 ### Strdrop training set
 
 ```
-grch38_strdrop_training_set_260108.json
+grch38_strdrop_training_set_260120.json
 ```
+
 May be input to strdrop with `--strdrop_training_set_json` to call coverage drops in repeats as described [here](https://genomic-medicine-sweden.github.io/nallo/latest/usage/#repeat-annotation).
 
 ### Annotation files

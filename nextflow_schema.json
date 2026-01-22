@@ -145,11 +145,11 @@
     "properties": {
         "base_reference_version": {
             "type": "string",
-            "default": "f80f55efae80f655ab01f3ce6963453863fad190"
+            "default": "3fcb86e8d72f8df5411f13e6513336de932be72c"
         },
         "base_reference_dir": {
             "type": "string",
-            "default": "https://github.com/Clinical-Genomics/reference-files/raw/f80f55efae80f655ab01f3ce6963453863fad190/"
+            "default": "https://github.com/Clinical-Genomics/reference-files/raw/3fcb86e8d72f8df5411f13e6513336de932be72c/"
         },
         "clinvar_version": {
             "type": "integer",

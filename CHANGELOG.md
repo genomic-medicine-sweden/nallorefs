@@ -5,7 +5,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## 0.4.1 - [2026-01-21]
 
-- [#31](https://github.com/genomic-medicine-sweden/nallorefs/pull/30) - Add download of strdrop background training set
+- [#31](https://github.com/genomic-medicine-sweden/nallorefs/pull/31) - Add download of strdrop background training set
+- [#32](https://github.com/genomic-medicine-sweden/nallorefs/pull/32) - Add download of Sambamba regions file
 
 ## 0.4.0 - [2026-01-08]
 

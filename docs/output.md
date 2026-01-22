@@ -33,6 +33,7 @@ The directories listed and files below will be created in the results directory 
 ├── grch38_variant_consequences_-v1.0-.txt
 ├── grch38_vep_112_loftool_scores_-v1.0-.txt
 ├── grch38_vep_112_pli_values_-v1.0-.txt
+├── hgnc.grch38p14.exons_260122.bed
 ├── md5sum
 │   ├── annotationsGRCh38_v1.6.tar.gz.md5
 │   ├── clinvar_20250217.vcf.gz.md5
@@ -169,6 +170,14 @@ prescored
 ```
 
 To give prescored CADD scores for small indels, input with `--cadd_prescored_indels` to nallo. Equivalent of `data/prescored/` folder described [here](https://github.com/kircherlab/CADD-scripts/#manual-installation).
+
+### Sambamba regions
+
+```
+hgnc.grch38p14.exons_260122.bed
+```
+
+May be given to Sambamba with `--sambamba_regions` as described [here](https://genomic-medicine-sweden.github.io/nallo/latest/usage/#alignment)
 
 ### Somalier sites
 

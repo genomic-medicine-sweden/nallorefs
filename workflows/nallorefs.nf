@@ -74,6 +74,7 @@ workflow NALLOREFS {
     ch_hificnv_expected_xx_cn    = downloadChannelOf(params.base_reference_dir + 'nallo/region/grch38_hificnv_expected_copynumer_xx_-v1.0-.bed')
     ch_hificnv_expected_xy_cn    = downloadChannelOf(params.base_reference_dir + 'nallo/region/grch38_hificnv_expected_copynumer_xy_-v1.0-.bed')
     ch_par_regions               = downloadChannelOf(params.base_reference_dir + 'nallo/region/grch38_par_-v1.0-.bed')
+    ch_sambamba_regions          = downloadChannelOf(params.base_reference_dir + 'nallo/region/hgnc.grch38p14.exons_260122.bed')
     ch_vep_loftool_scores        = downloadChannelOf(params.base_reference_dir + 'nallo/annotation/grch38_vep_112_loftool_scores_-v1.0-.txt') // Should perhaps VEP download process
     ch_vep_pli_values            = downloadChannelOf(params.base_reference_dir + 'nallo/annotation/grch38_vep_112_pli_values_-v1.0-.txt') // Should perhaps VEP download process
     // Files that needs unzipping
@@ -144,6 +145,7 @@ workflow NALLOREFS {
             .mix(ch_hificnv_expected_xx_cn)
             .mix(ch_hificnv_expected_xy_cn)
             .mix(ch_par_regions)
+            .mix(ch_sambamba_regions)
             .mix(ch_vep_loftool_scores)
             .mix(ch_vep_pli_values)
             .mix(ch_colorsdb_svs_vcf) // TODO: think about renaming the output files of these - and check md5

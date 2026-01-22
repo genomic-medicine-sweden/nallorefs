@@ -177,7 +177,7 @@ To give prescored CADD scores for small indels, input with `--cadd_prescored_ind
 hgnc.grch38p14.exons_260122.bed
 ```
 
-May be given to Sambamba with `--sambamba_regions` as described [here](https://genomic-medicine-sweden.github.io/nallo/latest/usage/#alignment)
+May be given to Sambamba with `--sambamba_regions` as described [here](https://genomic-medicine-sweden.github.io/nallo/latest/usage/#alignment).
 
 ### Somalier sites
 

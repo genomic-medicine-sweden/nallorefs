@@ -204,6 +204,9 @@
         "skip_general_files": {
             "type": "boolean"
         },
+        "skip_gens_baf_positions": {
+            "type": "boolean"
+        },
         "skip_vep_cache": {
             "type": "boolean"
         },

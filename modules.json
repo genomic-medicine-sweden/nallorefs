@@ -8,58 +8,47 @@
                     "bcftools/annotate": {
                         "branch": "master",
                         "git_sha": "81880787133db07d9b4c1febd152c090eb8325dc",
-                        "installed_by": [
-                            "modules"
-                        ]
+                        "installed_by": ["modules"]
                     },
                     "bcftools/concat": {
                         "branch": "master",
                         "git_sha": "81880787133db07d9b4c1febd152c090eb8325dc",
-                        "installed_by": [
-                            "modules"
-                        ]
+                        "installed_by": ["modules"]
+                    },
+                    "bcftools/query": {
+                        "branch": "master",
+                        "git_sha": "6383d8fe58f9498eecd5aa303e71a4a932d1e9f6",
+                        "installed_by": ["modules"]
                     },
                     "bcftools/view": {
                         "branch": "master",
                         "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
-                        "installed_by": [
-                            "modules"
-                        ]
+                        "installed_by": ["modules"]
                     },
                     "gunzip": {
                         "branch": "master",
                         "git_sha": "ce35ce92566b3328b405253543b9b2b4d4e5f4f7",
-                        "installed_by": [
-                            "modules"
-                        ]
+                        "installed_by": ["modules"]
                     },
                     "md5sum": {
                         "branch": "master",
                         "git_sha": "81880787133db07d9b4c1febd152c090eb8325dc",
-                        "installed_by": [
-                            "modules"
-                        ]
+                        "installed_by": ["modules"]
                     },
                     "tabix/tabix": {
                         "branch": "master",
                         "git_sha": "81880787133db07d9b4c1febd152c090eb8325dc",
-                        "installed_by": [
-                            "modules"
-                        ]
+                        "installed_by": ["modules"]
                     },
                     "untar": {
                         "branch": "master",
                         "git_sha": "81880787133db07d9b4c1febd152c090eb8325dc",
-                        "installed_by": [
-                            "modules"
-                        ]
+                        "installed_by": ["modules"]
                     },
                     "unzip": {
                         "branch": "master",
                         "git_sha": "41dfa3f7c0ffabb96a6a813fe321c6d1cc5b6e46",
-                        "installed_by": [
-                            "modules"
-                        ],
+                        "installed_by": ["modules"],
                         "patch": "modules/nf-core/unzip/unzip.diff"
                     }
                 }
@@ -69,23 +58,17 @@
                     "utils_nextflow_pipeline": {
                         "branch": "master",
                         "git_sha": "c2b22d85f30a706a3073387f30380704fcae013b",
-                        "installed_by": [
-                            "subworkflows"
-                        ]
+                        "installed_by": ["subworkflows"]
                     },
                     "utils_nfcore_pipeline": {
                         "branch": "master",
                         "git_sha": "51ae5406a030d4da1e49e4dab49756844fdd6c7a",
-                        "installed_by": [
-                            "subworkflows"
-                        ]
+                        "installed_by": ["subworkflows"]
                     },
                     "utils_nfschema_plugin": {
                         "branch": "master",
                         "git_sha": "2fd2cd6d0e7b273747f32e465fdc6bcc3ae0814e",
-                        "installed_by": [
-                            "subworkflows"
-                        ]
+                        "installed_by": ["subworkflows"]
                     }
                 }
             }

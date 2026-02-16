@@ -11,6 +11,7 @@ include { GNOMAD_SNVS                                                } from '../
 include { GUNZIP                                                     } from '../modules/nf-core/gunzip/'
 include { GUNZIP_REMOVE_HEADER_SORT_DBNSFP                           } from '../modules/local/gunzip_remove_header_sort_dbnsfp.nf'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_CADD_SNVS                   } from '../modules/nf-core/bcftools/view/'
+include { BCFTOOLS_QUERY as BCFTOOLS_QUERY_GENS_BAF_POSITIONS        } from '../modules/nf-core/bcftools/query/'
 include { BCFTOOLS_VIEW as BCFTOOLS_VIEW_GNOMAD_SVS                  } from '../modules/nf-core/bcftools/view/'
 include { ECHTVAR_ENCODE                                             } from '../modules/local/echtvar/encode/'
 include { EXTRACT_HEADER_DBNSFP                                      } from '../modules/local/extract_header_dbnsfp.nf'
@@ -347,6 +348,14 @@ workflow NALLOREFS {
             )
     }
 
+    if(!params.skip_gnomad_snvs && !params.skip_gens_baf_positions) {
+        BCFTOOLS_QUERY_GENS_BAF_POSITIONS (
+            GNOMAD_SNVS.out.vcf.map { meta, vcf -> [ meta, vcf, [] ] },
+            [],
+            [],
+            []
+        )
+    }
     //
     // Remove `CNV` SV-type, else SVDB will fail, e.g. https://github.com/nf-core/raredisease/issues/615
     //

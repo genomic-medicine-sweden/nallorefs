@@ -3,6 +3,11 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.4.3 - [2026-02-16]
+
+- [#36](https://github.com/genomic-medicine-sweden/nallorefs/pull/33) - Update reference-files commit hash to latest
+- [#35](https://github.com/genomic-medicine-sweden/nallorefs/pull/35) - Add gens baf positions generation
+
 ## 0.4.2 - [2026-01-22]
 
 - [#33](https://github.com/genomic-medicine-sweden/nallorefs/pull/33) - Add download of Sambamba regions file

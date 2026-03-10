@@ -41,8 +41,8 @@ Less common options for the pipeline, typically set in a config file.
 
 | Parameter | Description | Type | Default | Required | Hidden |
 |-----------|-----------|-----------|-----------|-----------|-----------|
-| `base_reference_version` |  | `string` | 383062271c05fd23481867359817179333d2f626 |  |  |
-| `base_reference_dir` |  | `string` | https://github.com/Clinical-Genomics/reference-files/raw/383062271c05fd23481867359817179333d2f626/ |  |  |
+| `base_reference_version` |  | `string` | 7452358a1a05e2bce62e9239dac81eb441996175 |  |  |
+| `base_reference_dir` |  | `string` | https://github.com/Clinical-Genomics/reference-files/raw/7452358a1a05e2bce62e9239dac81eb441996175/ |  |  |
 | `clinvar_version` |  | `integer` | 20251215 |  |  |
 | `clinvar` |  | `string` | https://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/weekly/clinvar_20251215.vcf.gz |  |  |
 | `clinvar_md5sum` |  | `string` | 8569c7ded09f17d4704caee5ebb263cd |  |  |
@@ -57,6 +57,7 @@ Less common options for the pipeline, typically set in a config file.
 | `local_echtvar_databases` |  | `string` |  |  |  |
 | `cadd_snvs_echtvar_zip` |  | `string` |  |  |  |
 | `skip_general_files` |  | `boolean` |  |  |  |
+| `skip_gens_baf_positions` |  | `boolean` |  |  |  |
 | `skip_vep_cache` |  | `boolean` |  |  |  |
 | `skip_cadd_annotations` |  | `boolean` |  |  |  |
 | `skip_cadd_indels` |  | `boolean` |  |  |  |
@@ -67,4 +68,5 @@ Less common options for the pipeline, typically set in a config file.
 | `dbnsfp` |  | `string` | https://usf.box.com/shared/static/2hzcx5s6p1xui7oen16xqzndfrkt8l9l |  |  |
 | `dbnsfp_md5sum` |  | `string` | 7e01ebb7a4dcb679b9b93b30c7ba131e |  |  |
 | `dbnsfp_version` |  | `string` | 4.5a |  |  |
+| `strdrop_training_set_version` |  | `integer` | 260120 |  |  |
 | `skip_dbnsfp` |  | `boolean` |  |  |  |

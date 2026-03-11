@@ -25,6 +25,7 @@ The directories listed and files below will be created in the results directory 
 ├── grch38_hificnv_excluded_regions_common_50_-v1.0-.bed.gz
 ├── grch38_hificnv_expected_copynumer_xx_-v1.0-.bed
 ├── grch38_hificnv_expected_copynumer_xy_-v1.0-.bed
+├── grch38_paraphrase_rules.yaml
 ├── grch38_par_-v1.0-.bed
 ├── grch38_rank_model_snvs_-v1.0-.ini
 ├── grch38_rank_model_svs_-v1.0-.ini
@@ -119,6 +120,14 @@ grch38_gens_baf_positions_gnomad_v4.1_0.05_snvs
 ```
 
 May be input to the prepare gens subworkflow as described [here](https://genomic-medicine-sweden.github.io/nallo/latest/usage/#gens-input-preparation).
+
+### Paraphrase rules
+
+```
+grch38_paraphrase_rules.yaml
+```
+
+May be input with `--paraphrase_rules` to the paralogs annotation subworkflow as described [here](https://genomic-medicine-sweden.github.io/nallo/latest/usage/#paralogs-annotation).
 
 ### PARs
 

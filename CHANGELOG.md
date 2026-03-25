@@ -2,7 +2,7 @@
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
-## 0.5.0 - [XXXX-XX-XX]
+## unreleased - [XXXX-XX-XX]
 
 - [#39](https://github.com/genomic-medicine-sweden/nallorefs/pull/39) - Keep only PASS variants in Gnomad SVs
 - [#39](https://github.com/genomic-medicine-sweden/nallorefs/pull/39) - Remove sematic versioning

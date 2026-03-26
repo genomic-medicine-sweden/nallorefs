@@ -20,6 +20,7 @@ include { MD5SUM as MD5SUM_CADD_SNVS                                 } from '../
 include { MD5SUM as MD5SUM_DBNSFP                                    } from '../modules/nf-core/md5sum/main'
 include { MD5SUM as MD5SUM_LOCAL_ECTHVAR_DATABASES                   } from '../modules/nf-core/md5sum/main'
 include { MD5SUM as MD5SUM_LOCAL_SVDB_DATABASES                      } from '../modules/nf-core/md5sum/main'
+include { SAMTOOLS_FAIDX                                             } from '../modules/nf-core/samtools/faidx/main'
 include { UNTAR as UNTAR_VEP_CACHE                                   } from '../modules/nf-core/untar/main'
 include { UNTAR as UNTAR_CADD_ANNOTATIONS                            } from '../modules/nf-core/untar/main'
 include { UNZIP                                                      } from '../modules/nf-core/unzip/main'
@@ -160,15 +161,22 @@ workflow NALLOREFS {
     // Unzip/untar downloaded files
     //
 
-    GUNZIP (
-        ch_reference_genome
-    )
-
     if(!params.skip_vep_cache) {
         UNTAR_VEP_CACHE (
             ch_vep_cache
         )
     }
+
+    //
+    // Gunzip and index reference genome
+    //
+    GUNZIP (
+        ch_reference_genome
+    )
+
+    SAMTOOLS_FAIDX (
+        GUNZIP.out.gunzip
+    )
 
     //
     // Download CADD resources (200GB)

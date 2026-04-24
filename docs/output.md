@@ -22,6 +22,7 @@ The directories listed and files below will be created in the results directory 
 ├── grch38_dbNSFP4.5a.gz.tbi
 ├── grch38_gens_baf_positions_gnomad_v4.1_0.05_snvs
 ├── GRCh38_GIABv3_no_alt_analysis_set_maskedGRC_decoys_MAP2K3_KMT2C_KCNJ18.fasta
+├── GRCh38_GIABv3_no_alt_analysis_set_maskedGRC_decoys_MAP2K3_KMT2C_KCNJ18.fasta.fai
 ├── grch38_hificnv_excluded_regions_common_50_-v1.0-.bed.gz
 ├── grch38_hificnv_expected_copynumer_xx_-v1.0-.bed
 ├── grch38_hificnv_expected_copynumer_xy_-v1.0-.bed

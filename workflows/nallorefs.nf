@@ -175,7 +175,7 @@ workflow NALLOREFS {
     )
 
     SAMTOOLS_FAIDX (
-        GUNZIP.out.gunzip,
+        GUNZIP.out.gunzip.map { meta, fasta -> [ meta, fasta, [] ] },
         false
     )
 

@@ -175,7 +175,8 @@ workflow NALLOREFS {
     )
 
     SAMTOOLS_FAIDX (
-        GUNZIP.out.gunzip
+        GUNZIP.out.gunzip,
+        false
     )
 
     //

@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - [#39](https://github.com/genomic-medicine-sweden/nallorefs/pull/39) - Keep only PASS variants in Gnomad SVs
 - [#39](https://github.com/genomic-medicine-sweden/nallorefs/pull/39) - Remove sematic versioning
 - [#40](https://github.com/genomic-medicine-sweden/nallorefs/pull/40) - Added creation of reference fai
+- [#45](https://github.com/genomic-medicine-sweden/nallorefs/pull/45) - Added parameters for `cadd_prescored_indels_tsv` and `cadd_prescored_indels_tbi`
 
 ## 0.4.4 - [2026-03-11]
 

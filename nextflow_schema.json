@@ -173,11 +173,11 @@
         },
         "cadd_annotations": {
             "type": "string",
-            "default": "https://kircherlab.bihealth.org/download/CADD/v1.7/GRCh37/GRCh37_v1.7.tar.gz"
+            "default": "https://kircherlab.bihealth.org/download/CADD/v1.7/GRCh38/GRCh38_v1.7.tar.gz"
         },
         "cadd_annotations_md5sum": {
             "type": "string",
-            "default": "22549309c65de8d25e903695aa4f749f"
+            "default": "205d3e702df3565efb424e2ca80c9d25"
         },
         "cadd_snvs": {
             "type": "string",
@@ -185,7 +185,7 @@
         },
         "cadd_snvs_md5sum": {
             "type": "string",
-            "default": "fa3ee79df2f509ead49438f60209566d"
+            "default": "88577a55f1cd519d44e0f415ba248eb9"
         },
         "gnomad_version": {
             "type": "number",

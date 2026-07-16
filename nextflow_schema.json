@@ -173,19 +173,19 @@
         },
         "cadd_annotations": {
             "type": "string",
-            "default": "https://kircherlab.bihealth.org/download/CADD/v1.6/GRCh38/annotationsGRCh38_v1.6.tar.gz"
+            "default": "https://kircherlab.bihealth.org/download/CADD/v1.7/GRCh37/GRCh37_v1.7.tar.gz"
         },
         "cadd_annotations_md5sum": {
             "type": "string",
-            "default": "46bae9a0acce192ae6ff34b0e496194b"
+            "default": "22549309c65de8d25e903695aa4f749f"
         },
         "cadd_snvs": {
             "type": "string",
-            "default": "https://kircherlab.bihealth.org/download/CADD/v1.6/GRCh38/whole_genome_SNVs.tsv.gz"
+            "default": "https://kircherlab.bihealth.org/download/CADD/v1.7/GRCh38/whole_genome_SNVs.tsv.gz"
         },
         "cadd_snvs_md5sum": {
             "type": "string",
-            "default": "faaa80ef3948cf44e56a3629a90cdaaa"
+            "default": "fa3ee79df2f509ead49438f60209566d"
         },
         "gnomad_version": {
             "type": "number",
@@ -249,11 +249,11 @@
         },
         "cadd_prescored_indels_tsv": {
             "type": "string",
-            "default": "https://kircherlab.bihealth.org/download/CADD/v1.6/GRCh38/gnomad.genomes.r3.0.indel.tsv.gz"
+            "default": "https://kircherlab.bihealth.org/download/CADD/v1.7/GRCh38/gnomad.genomes.r4.0.indel.tsv.gz"
         },
         "cadd_prescored_indels_tbi": {
             "type": "string",
-            "default": "https://kircherlab.bihealth.org/download/CADD/v1.6/GRCh38/gnomad.genomes.r3.0.indel.tsv.gz.tbi"
+            "default": "https://kircherlab.bihealth.org/download/CADD/v1.7/GRCh38/gnomad.genomes.r4.0.indel.tsv.gz.tbi"
         }
     }
 }

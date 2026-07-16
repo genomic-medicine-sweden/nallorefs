@@ -246,6 +246,14 @@
         },
         "skip_dbnsfp": {
             "type": "boolean"
+        },
+        "cadd_prescored_indels_tsv": {
+            "type": "string",
+            "default": "https://kircherlab.bihealth.org/download/CADD/v1.6/GRCh38/gnomad.genomes.r3.0.indel.tsv.gz"
+        },
+        "cadd_prescored_indels_tbi": {
+            "type": "string",
+            "default": "https://kircherlab.bihealth.org/download/CADD/v1.6/GRCh38/gnomad.genomes.r3.0.indel.tsv.gz.tbi"
         }
     }
 }

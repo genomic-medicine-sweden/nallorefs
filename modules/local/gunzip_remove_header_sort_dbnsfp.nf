@@ -53,7 +53,7 @@ process GUNZIP_REMOVE_HEADER_SORT_DBNSFP {
         ${archive} | \\
         tail -n +2 | \\
         cut -f 1,2,3,4,5,6,7,15,83,84,184,185,187,193 | \\
-        sort -k1,1 -k2,2n \\
+        sort --temporary-directory . -k1,1 -k2,2n \\
         > ${gunzip}
 
     cat <<-END_VERSIONS > versions.yml

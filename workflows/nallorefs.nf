@@ -85,8 +85,8 @@ workflow NALLOREFS {
     // CADD resources. Either download and checksum remote file, or just checksum local.
     ch_cadd_annotations          = remoteLocalBranchedChannelOf(params.cadd_annotations)
     // CADD prescored indels
-    ch_cadd_indels               = downloadChannelOf('https://kircherlab.bihealth.org/download/CADD/v1.6/GRCh38/gnomad.genomes.r3.0.indel.tsv.gz')
-    ch_cadd_indels_tbi           = downloadChannelOf('https://kircherlab.bihealth.org/download/CADD/v1.6/GRCh38/gnomad.genomes.r3.0.indel.tsv.gz.tbi')
+    ch_cadd_indels               = downloadChannelOf(params.cadd_prescored_indels_tsv)
+    ch_cadd_indels_tbi           = downloadChannelOf(params.cadd_prescored_indels_tbi)
     // CADD SNVs. Either download and checksum remote file, or just checksum local.
     ch_cadd_snvs                     = remoteLocalBranchedChannelOf(params.cadd_snvs)
     ch_echtvar_encode_cadd_snvs_json = fileChannelOf("${projectDir}/assets/ecthvar_encode_cadd_snvs.json") // TODO: move to reference-files?
@@ -175,7 +175,8 @@ workflow NALLOREFS {
     )
 
     SAMTOOLS_FAIDX (
-        GUNZIP.out.gunzip
+        GUNZIP.out.gunzip.map { meta, fasta -> [ meta, fasta, [] ] },
+        false
     )
 
     //

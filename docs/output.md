@@ -30,7 +30,7 @@ The directories listed and files below will be created in the results directory 
 ├── grch38_par_-v1.0-.bed
 ├── grch38_rank_model_snvs_-v1.0-.ini
 ├── grch38_rank_model_svs_-v1.0-.ini
-├── grch38_reduced_penetrance_-v1.0-.tsv
+├── genmod_reduced_penetrance.tsv
 ├── grch38_strdrop_training_set_260120.json
 ├── grch38_trgt_pathogenic_repeats.bed
 ├── grch38_variant_consequences_-v1.0-.txt
@@ -143,7 +143,7 @@ May be input with `--par_regions` as decribed [here](https://genomic-medicine-sw
 ```
 grch38_rank_model_snvs_-v1.0-.ini
 grch38_rank_model_svs_-v1.0-.ini
-grch38_reduced_penetrance_-v1.0-.tsv
+genmod_reduced_penetrance.tsv
 ```
 
 May be input to genmod with `--genmod_score_config_snvs`, `--genmod_score_config_svs` and `--genmod_reduced_penetrance`, as described [here](https://genomic-medicine-sweden.github.io/nallo/latest/usage/#rank-snvs-and-indels) and [here](https://genomic-medicine-sweden.github.io/nallo/latest/usage/#sv-annotation)

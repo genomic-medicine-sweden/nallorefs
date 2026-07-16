@@ -63,7 +63,7 @@ workflow NALLOREFS {
     // the bigger ones e.g. the CADD resources, that may be better downloaded in a process.
 
     // General files stored in reference-files
-    ch_genmod_reduced_penetrance = downloadChannelOf(params.base_reference_dir + 'nallo/annotation/grch38_reduced_penetrance_-v1.0-.tsv')
+    ch_genmod_reduced_penetrance = downloadChannelOf(params.base_reference_dir + 'shared/genmod_reduced_penetrance.tsv')
     ch_trgt_pathogenic_repeats   = downloadChannelOf(params.base_reference_dir + 'nallo/annotation/grch38_trgt_pathogenic_repeats.bed')
     ch_variant_consequences      = downloadChannelOf(params.base_reference_dir + 'nallo/annotation/grch38_variant_consequences_-v1.0-.txt')
     ch_somalier_sites            = downloadChannelOf(params.base_reference_dir + 'nallo/annotation/sites.hg38.vcf.gz')

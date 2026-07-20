@@ -38,12 +38,12 @@ The directories listed and files below will be created in the results directory 
 ├── grch38_vep_112_pli_values_-v1.0-.txt
 ├── hgnc.grch38p14.exons_260122.bed
 ├── md5sum
-│   ├── annotationsGRCh38_v1.6.tar.gz.md5
+│   ├── GRCh38_v1.7.tar.gz.md5
 │   ├── clinvar_20250217.vcf.gz.md5
 │   └── whole_genome_SNVs.tsv.gz.md5
 ├── pipeline_info
 ├── prescored
-│   └── GRCh38_v1.6
+│   └── GRCh38_v1.7
 │       └── no_anno
 ├── sites.hg38.vcf.gz
 ├── variant_catalog_grch38.json

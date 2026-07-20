@@ -19,9 +19,9 @@ For CADD-resources, CADD SNVs, GnomAD SNVs and dbNSFP, these files are so large 
 These files can be downloaded with:
 ```
 # Download CADD annotations
-wget -c https://kircherlab.bihealth.org/download/CADD/v1.6/GRCh38/annotationsGRCh38_v1.6.tar.gz
+wget -c https://kircherlab.bihealth.org/download/CADD/v1.7/GRCh38/GRCh38_v1.7.tar.gz
 # Download CADD SNVs
-wget -c https://kircherlab.bihealth.org/download/CADD/v1.6/GRCh38/whole_genome_SNVs.tsv.gz
+wget -c https://kircherlab.bihealth.org/download/CADD/v1.7/GRCh38/whole_genome_SNVs.tsv.gz
 # Download gnomad
 mkdir -p gnomad
 cd gnomad

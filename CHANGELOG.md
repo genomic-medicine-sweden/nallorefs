@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - [#39](https://github.com/genomic-medicine-sweden/nallorefs/pull/39) - Remove sematic versioning
 - [#40](https://github.com/genomic-medicine-sweden/nallorefs/pull/40) - Added creation of reference fai
 - [#45](https://github.com/genomic-medicine-sweden/nallorefs/pull/45) - Added parameters for `cadd_prescored_indels_tsv` and `cadd_prescored_indels_tbi`
-- [#49](https://github.com/genomic-medicine-sweden/nallorefs/pull/49) - Updated CADD to 1.7
+- [#49](https://github.com/genomic-medicine-sweden/nallorefs/pull/49),[#56](https://github.com/genomic-medicine-sweden/nallorefs/pull/56) - Updated CADD to 1.7
 - [#50](https://github.com/genomic-medicine-sweden/nallorefs/pull/50) - Fixed sort in `gunzip_remove_header_sort_dbnsfp` not using work directory as temporary directory
 - [#51](https://github.com/genomic-medicine-sweden/nallorefs/pull/51), [#54](https://github.com/genomic-medicine-sweden/nallorefs/pull/54) - Updated `base_reference_version` to include fix for reduced penetrance file
 

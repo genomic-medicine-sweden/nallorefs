@@ -28,8 +28,8 @@ The directories listed and files below will be created in the results directory 
 ├── grch38_hificnv_expected_copynumer_xy_-v1.0-.bed
 ├── grch38_paraphrase_rules.yaml
 ├── grch38_par_-v1.0-.bed
-├── grch38_rank_model_snvs_-v1.0-.ini
-├── grch38_rank_model_svs_-v1.0-.ini
+├── grch38_rank_model_snvs_-v1.1-.ini
+├── grch38_rank_model_svs_-v1.1-.ini
 ├── genmod_reduced_penetrance.tsv
 ├── grch38_strdrop_training_set_260120.json
 ├── grch38_trgt_pathogenic_repeats.bed
@@ -141,8 +141,8 @@ May be input with `--par_regions` as decribed [here](https://genomic-medicine-sw
 ### Ranking files
 
 ```
-grch38_rank_model_snvs_-v1.0-.ini
-grch38_rank_model_svs_-v1.0-.ini
+grch38_rank_model_snvs_-v1.1-.ini
+grch38_rank_model_svs_-v1.1-.ini
 genmod_reduced_penetrance.tsv
 ```
 

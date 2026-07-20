@@ -41,8 +41,8 @@ Less common options for the pipeline, typically set in a config file.
 
 | Parameter | Description | Type | Default | Required | Hidden |
 |-----------|-----------|-----------|-----------|-----------|-----------|
-| `base_reference_version` |  | `string` | 2f03fb600de11fc769fff3dce68167556786ce27 |  |  |
-| `base_reference_dir` |  | `string` | https://github.com/Clinical-Genomics/reference-files/raw/2f03fb600de11fc769fff3dce68167556786ce27/ |  |  |
+| `base_reference_version` |  | `string` | 1b19127064b554727754e18976fbfaf0051d04f7 |  |  |
+| `base_reference_dir` |  | `string` | https://github.com/Clinical-Genomics/reference-files/raw/1b19127064b554727754e18976fbfaf0051d04f7/ |  |  |
 | `clinvar_version` |  | `integer` | 20251215 |  |  |
 | `clinvar` |  | `string` | https://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/weekly/clinvar_20251215.vcf.gz |  |  |
 | `clinvar_md5sum` |  | `string` | 8569c7ded09f17d4704caee5ebb263cd |  |  |

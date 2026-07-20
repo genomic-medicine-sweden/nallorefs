@@ -41,17 +41,17 @@ Less common options for the pipeline, typically set in a config file.
 
 | Parameter | Description | Type | Default | Required | Hidden |
 |-----------|-----------|-----------|-----------|-----------|-----------|
-| `base_reference_version` |  | `string` | 7452358a1a05e2bce62e9239dac81eb441996175 |  |  |
-| `base_reference_dir` |  | `string` | https://github.com/Clinical-Genomics/reference-files/raw/7452358a1a05e2bce62e9239dac81eb441996175/ |  |  |
+| `base_reference_version` |  | `string` | 2f03fb600de11fc769fff3dce68167556786ce27 |  |  |
+| `base_reference_dir` |  | `string` | https://github.com/Clinical-Genomics/reference-files/raw/2f03fb600de11fc769fff3dce68167556786ce27/ |  |  |
 | `clinvar_version` |  | `integer` | 20251215 |  |  |
 | `clinvar` |  | `string` | https://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/weekly/clinvar_20251215.vcf.gz |  |  |
 | `clinvar_md5sum` |  | `string` | 8569c7ded09f17d4704caee5ebb263cd |  |  |
 | `vep_cache_version` |  | `integer` | 110 |  |  |
 | `vep_cache_type` |  | `string` | merged |  |  |
-| `cadd_annotations` |  | `string` | https://kircherlab.bihealth.org/download/CADD/v1.6/GRCh38/annotationsGRCh38_v1.6.tar.gz |  |  |
-| `cadd_annotations_md5sum` |  | `string` | 46bae9a0acce192ae6ff34b0e496194b |  |  |
-| `cadd_snvs` |  | `string` | https://kircherlab.bihealth.org/download/CADD/v1.6/GRCh38/whole_genome_SNVs.tsv.gz |  |  |
-| `cadd_snvs_md5sum` |  | `string` | faaa80ef3948cf44e56a3629a90cdaaa |  |  |
+| `cadd_annotations` |  | `string` | https://kircherlab.bihealth.org/download/CADD/v1.7/GRCh38/GRCh38_v1.7.tar.gz |  |  |
+| `cadd_annotations_md5sum` |  | `string` | 205d3e702df3565efb424e2ca80c9d25 |  |  |
+| `cadd_snvs` |  | `string` | https://kircherlab.bihealth.org/download/CADD/v1.7/GRCh38/whole_genome_SNVs.tsv.gz |  |  |
+| `cadd_snvs_md5sum` |  | `string` | 88577a55f1cd519d44e0f415ba248eb9 |  |  |
 | `gnomad_version` |  | `number` | 4.1 |  |  |
 | `gnomad_base_path` |  | `string` | https://storage.googleapis.com/gcp-public-data--gnomad/release/4.1/vcf/genomes/ |  |  |
 | `local_echtvar_databases` |  | `string` |  |  |  |
@@ -70,3 +70,5 @@ Less common options for the pipeline, typically set in a config file.
 | `dbnsfp_version` |  | `string` | 4.5a |  |  |
 | `strdrop_training_set_version` |  | `integer` | 260120 |  |  |
 | `skip_dbnsfp` |  | `boolean` |  |  |  |
+| `cadd_prescored_indels_tsv` |  | `string` | https://kircherlab.bihealth.org/download/CADD/v1.7/GRCh38/gnomad.genomes.r4.0.indel.tsv.gz |  |  |
+| `cadd_prescored_indels_tbi` |  | `string` | https://kircherlab.bihealth.org/download/CADD/v1.7/GRCh38/gnomad.genomes.r4.0.indel.tsv.gz.tbi |  |  |

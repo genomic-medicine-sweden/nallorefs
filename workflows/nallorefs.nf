@@ -68,8 +68,8 @@ workflow NALLOREFS {
     ch_variant_consequences      = downloadChannelOf(params.base_reference_dir + 'nallo/annotation/grch38_variant_consequences_-v1.0-.txt')
     ch_somalier_sites            = downloadChannelOf(params.base_reference_dir + 'nallo/annotation/sites.hg38.vcf.gz')
     ch_stranger_repeat_catalog   = downloadChannelOf(params.base_reference_dir + 'nallo/annotation/grch38_variant_catalog_stranger.json')
-    ch_genmod_snvs_rank_model    = downloadChannelOf(params.base_reference_dir + 'nallo/rank_model/grch38_rank_model_snvs_-v1.0-.ini')
-    ch_genmod_svs_rank_model     = downloadChannelOf(params.base_reference_dir + 'nallo/rank_model/grch38_rank_model_svs_-v1.0-.ini')
+    ch_genmod_snvs_rank_model    = downloadChannelOf(params.base_reference_dir + 'nallo/rank_model/grch38_rank_model_snvs_-v1.1-.ini')
+    ch_genmod_svs_rank_model     = downloadChannelOf(params.base_reference_dir + 'nallo/rank_model/grch38_rank_model_svs_-v1.1-.ini')
     ch_strdrop_training_set_json = downloadChannelOf(params.base_reference_dir + 'nallo/annotation/grch38_strdrop_training_set_' + params.strdrop_training_set_version + '.json')
     ch_target_regions            = downloadChannelOf(params.base_reference_dir + 'nallo/region/grch38_chromosomes_split_at_centromeres_-v1.0-.bed') // Not really necessary
     ch_hificnv_excluded_regions  = downloadChannelOf(params.base_reference_dir + 'nallo/region/grch38_hificnv_excluded_regions_common_50_-v1.0-.bed.gz')

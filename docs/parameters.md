@@ -46,7 +46,7 @@ Less common options for the pipeline, typically set in a config file.
 | `clinvar_version` |  | `integer` | 20251215 |  |  |
 | `clinvar` |  | `string` | https://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/weekly/clinvar_20251215.vcf.gz |  |  |
 | `clinvar_md5sum` |  | `string` | 8569c7ded09f17d4704caee5ebb263cd |  |  |
-| `vep_cache_version` |  | `integer` | 110 |  |  |
+| `vep_cache_version` |  | `integer` | 116 |  |  |
 | `vep_cache_type` |  | `string` | merged |  |  |
 | `cadd_annotations` |  | `string` | https://kircherlab.bihealth.org/download/CADD/v1.7/GRCh38/GRCh38_v1.7.tar.gz |  |  |
 | `cadd_annotations_md5sum` |  | `string` | 205d3e702df3565efb424e2ca80c9d25 |  |  |

@@ -4,6 +4,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ## 0.5.1dev - [XXXX-XX-XX]
 - [#57](https://github.com/genomic-medicine-sweden/nallorefs/pull/57) - Updated `vep` references to version 116 in all related files, updated `base_reference_version` to include new vep 116 files
+- [#60](https://github.com/genomic-medicine-sweden/nallorefs/pull/60) - Added new methbat files to download in `nallorefs.nf` : `methbat_profile` and `methbat_map`
 
 ## 0.5.0 - [2026-11-11]
 

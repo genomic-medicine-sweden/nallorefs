@@ -80,6 +80,8 @@ workflow NALLOREFS {
     ch_sambamba_regions          = downloadChannelOf(params.base_reference_dir + 'nallo/region/hgnc.grch38p14.exons_260122.bed')
     ch_vep_loftool_scores        = downloadChannelOf(params.base_reference_dir + 'nallo/annotation/grch38_vep_116_loftool_scores.txt') // Should perhaps VEP download process
     ch_vep_pli_values            = downloadChannelOf(params.base_reference_dir + 'nallo/annotation/grch38_vep_116_pli_values.txt') // Should perhaps VEP download process
+    ch_methbat_profile           = downloadChannelOf(params.base_reference_dir + 'nallo/region/grch38_methbat_background_292.profile.tsv')
+    ch_methbat_map               = downloadChannelOf(params.base_reference_dir + 'nallo/region/grch38_methbat_background_292.map.tsv')
     // Files that needs unzipping
     ch_reference_genome          = fileChannelOf('https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/release/references/GRCh38/GRCh38_GIABv3_no_alt_analysis_set_maskedGRC_decoys_MAP2K3_KMT2C_KCNJ18.fasta.gz')
     // CADD resources. Either download and checksum remote file, or just checksum local.
@@ -152,6 +154,8 @@ workflow NALLOREFS {
             .mix(ch_sambamba_regions)
             .mix(ch_vep_loftool_scores)
             .mix(ch_vep_pli_values)
+            .mix(ch_methbat_profile)
+            .mix(ch_methbat_map)
             .mix(ch_colorsdb_svs_vcf) // TODO: think about renaming the output files of these - and check md5
         WGET_GENERAL ( ch_general_files_to_download )
 

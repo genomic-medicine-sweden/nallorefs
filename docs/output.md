@@ -26,6 +26,8 @@ The directories listed and files below will be created in the results directory 
 ├── grch38_hificnv_excluded_regions_common_50_-v1.0-.bed.gz
 ├── grch38_hificnv_expected_copynumer_xx_-v1.0-.bed
 ├── grch38_hificnv_expected_copynumer_xy_-v1.0-.bed
+├── grch38_methbat_background_292.map.tsv
+├── grch38_methbat_background_292.profile.tsv
 ├── grch38_paraphrase_rules.yaml
 ├── grch38_par_-v1.0-.bed
 ├── grch38_rank_model_snvs_-v1.1-.ini
@@ -213,6 +215,15 @@ variant_catalog_grch38.json
 ```
 
 May be given to stranger with `--stranger_repeat_catalog`, as described [here](https://genomic-medicine-sweden.github.io/nallo/latest/usage/#repeat-annotation).
+
+### Methbat files
+
+```
+grch38_methbat_background_292.map.tsv
+grch38_methbat_background_292.profile.tsv
+```
+
+May be given to methbat with `--methbat_regions` and `--methbat_map`, as described [here](https://genomic-medicine-sweden.github.io/nallo/latest/usage/#methylation-calling).
 
 ### vep_cache
 

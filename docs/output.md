@@ -216,6 +216,15 @@ variant_catalog_grch38.json
 
 May be given to stranger with `--stranger_repeat_catalog`, as described [here](https://genomic-medicine-sweden.github.io/nallo/latest/usage/#repeat-annotation).
 
+### Methbat files
+
+```
+grch38_methbat_background_292.map.tsv
+grch38_methbat_background_292.profile.tsv
+```
+
+May be given to methbat with `--methbat_regions` and `--methbat_map`, as described [here](https://genomic-medicine-sweden.github.io/nallo/latest/usage/#methylation-calling).
+
 ### vep_cache
 
 ```

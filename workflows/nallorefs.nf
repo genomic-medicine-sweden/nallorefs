@@ -78,8 +78,8 @@ workflow NALLOREFS {
     ch_paraphrase_rules          = downloadChannelOf(params.base_reference_dir + 'nallo/annotation/grch38_paraphrase_rules.yaml')
     ch_par_regions               = downloadChannelOf(params.base_reference_dir + 'nallo/region/grch38_par_-v1.0-.bed')
     ch_sambamba_regions          = downloadChannelOf(params.base_reference_dir + 'nallo/region/hgnc.grch38p14.exons_260122.bed')
-    ch_vep_loftool_scores        = downloadChannelOf(params.base_reference_dir + 'nallo/annotation/grch38_vep_116_loftool_scores_-v1.0-.txt') // Should perhaps VEP download process
-    ch_vep_pli_values            = downloadChannelOf(params.base_reference_dir + 'nallo/annotation/grch38_vep_116_pli_values_-v1.0-.txt') // Should perhaps VEP download process
+    ch_vep_loftool_scores        = downloadChannelOf(params.base_reference_dir + 'nallo/annotation/grch38_vep_116_loftool_scores.txt') // Should perhaps VEP download process
+    ch_vep_pli_values            = downloadChannelOf(params.base_reference_dir + 'nallo/annotation/grch38_vep_116_pli_values.txt') // Should perhaps VEP download process
     // Files that needs unzipping
     ch_reference_genome          = fileChannelOf('https://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/release/references/GRCh38/GRCh38_GIABv3_no_alt_analysis_set_maskedGRC_decoys_MAP2K3_KMT2C_KCNJ18.fasta.gz')
     // CADD resources. Either download and checksum remote file, or just checksum local.

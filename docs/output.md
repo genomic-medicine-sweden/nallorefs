@@ -34,8 +34,8 @@ The directories listed and files below will be created in the results directory 
 ├── grch38_strdrop_training_set_260120.json
 ├── grch38_trgt_pathogenic_repeats.bed
 ├── grch38_variant_consequences_-v1.0-.txt
-├── grch38_vep_116_loftool_scores_-v1.0-.txt
-├── grch38_vep_116_pli_values_-v1.0-.txt
+├── grch38_vep_116_loftool_scores.txt
+├── grch38_vep_116_pli_values.txt
 ├── hgnc.grch38p14.exons_260122.bed
 ├── md5sum
 │   ├── GRCh38_v1.7.tar.gz.md5
@@ -89,12 +89,12 @@ May be input with `--target_regions`.
 ```
 grch38_clinvar_20250217_renamed_reformatted.vcf.gz
 grch38_clinvar_20250217_renamed_reformatted.vcf.gz.tbi
-grch38_vep_116_loftool_scores_-v1.0-.txt
-grch38_vep_116_pli_values_-v1.0-.txt
+grch38_vep_116_loftool_scores.txt
+grch38_vep_116_pli_values.txt
 ```
 
 May be input to VEP with `--vep_plugin_files`, as described [here](https://genomic-medicine-sweden.github.io/nallo/latest/usage/#snv-annotation).
-If using `grch38_vep_116_loftool_scores_-v1.0-.txt` and `grch38_vep_116_pli_values_-v1.0-.txt` you probably need to update your config file for `ENSEMBLVEP_SNV` and `ÈNSEMBLVEP_SV`, because Nallo by default expects them to be named `pLI_values.txt` and `LoFtool_scores.txt`. You can find an example of this under the `vep_cache` section below.
+If using `grch38_vep_116_loftool_scores.txt` and `grch38_vep_116_pli_values.txt` you probably need to update your config file for `ENSEMBLVEP_SNV` and `ÈNSEMBLVEP_SV`, because Nallo by default expects them to be named `pLI_values.txt` and `LoFtool_scores.txt`. You can find an example of this under the `vep_cache` section below.
 
 ### Reference fasta
 
@@ -228,7 +228,7 @@ The config could for example look like this:
     withName: '.*:ANNOTATE_SVS:ENSEMBLVEP_SV' {
         ext.args = [
           '--dir_plugins .',
-          '--plugin pLI,grch38_vep_116_pli_values_-v1.0-.txt',
+          '--plugin pLI,grch38_vep_116_pli_values.txt',
           '--distance 5000',
           '--buffer_size 5000',
           '--format vcf --max_sv_size 999999999',
@@ -245,8 +245,8 @@ The config could for example look like this:
     withName: '.*:ANNOTATE_SNVS:ENSEMBLVEP_SNV' {
         ext.args = [
             '--dir_plugins .',
-            '--plugin LoFtool,grch38_vep_116_loftool_scores_-v1.0-.txt',
-            '--plugin pLI,grch38_vep_116_pli_values_-v1.0-.txt',
+            '--plugin LoFtool,grch38_vep_116_loftool_scores.txt',
+            '--plugin pLI,grch38_vep_116_pli_values.txt',
             '--plugin SpliceAI,snv=spliceai_scores.raw.snv.hg38.vcf.gz,indel=spliceai_scores.raw.indel.hg38.vcf.gz',
             '--plugin dbNSFP,grch38_dbNSFP4.5a.gz,transcript_match=1,GERP++_RS,GERP++_NR,phyloP100way_vertebrate,phastCons100way_vertebrate,REVEL_rankscore,REVEL_score,rs_dbSNP150',
             '--distance 5000',

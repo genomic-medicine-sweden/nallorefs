@@ -41,12 +41,12 @@ Less common options for the pipeline, typically set in a config file.
 
 | Parameter | Description | Type | Default | Required | Hidden |
 |-----------|-----------|-----------|-----------|-----------|-----------|
-| `base_reference_version` |  | `string` | 1b19127064b554727754e18976fbfaf0051d04f7 |  |  |
-| `base_reference_dir` |  | `string` | https://github.com/Clinical-Genomics/reference-files/raw/1b19127064b554727754e18976fbfaf0051d04f7/ |  |  |
+| `base_reference_version` |  | `string` | 29ac49cc24819bb95d6be71596074e86a9b00d45 |  |  |
+| `base_reference_dir` |  | `string` | https://github.com/Clinical-Genomics/reference-files/raw/29ac49cc24819bb95d6be71596074e86a9b00d45/ |  |  |
 | `clinvar_version` |  | `integer` | 20251215 |  |  |
 | `clinvar` |  | `string` | https://ftp.ncbi.nlm.nih.gov/pub/clinvar/vcf_GRCh38/weekly/clinvar_20251215.vcf.gz |  |  |
 | `clinvar_md5sum` |  | `string` | 8569c7ded09f17d4704caee5ebb263cd |  |  |
-| `vep_cache_version` |  | `integer` | 110 |  |  |
+| `vep_cache_version` |  | `integer` | 116 |  |  |
 | `vep_cache_type` |  | `string` | merged |  |  |
 | `cadd_annotations` |  | `string` | https://kircherlab.bihealth.org/download/CADD/v1.7/GRCh38/GRCh38_v1.7.tar.gz |  |  |
 | `cadd_annotations_md5sum` |  | `string` | 205d3e702df3565efb424e2ca80c9d25 |  |  |

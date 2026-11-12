@@ -2,6 +2,9 @@
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
+## 0.5.1dev - [XXXX-XX-XX]
+- [#57](https://github.com/genomic-medicine-sweden/nallorefs/pull/57) - Updated `vep` references to version 116 in all related files, updated `base_reference_version` to include new vep 116 files
+
 ## 0.5.0 - [2026-11-11]
 
 - [#39](https://github.com/genomic-medicine-sweden/nallorefs/pull/39) - Keep only PASS variants in Gnomad SVs
@@ -12,7 +15,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 - [#50](https://github.com/genomic-medicine-sweden/nallorefs/pull/50) - Fixed sort in `gunzip_remove_header_sort_dbnsfp` not using work directory as temporary directory
 - [#51](https://github.com/genomic-medicine-sweden/nallorefs/pull/51), [#54](https://github.com/genomic-medicine-sweden/nallorefs/pull/54) - Updated `base_reference_version` to include fix for reduced penetrance file
 - [#52](https://github.com/genomic-medicine-sweden/nallorefs/pull/52) - Updated `bcftool/view` to fix compilation error
-
 
 ## 0.4.4 - [2026-03-11]
 

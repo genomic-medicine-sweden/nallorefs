@@ -3,7 +3,7 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ## 0.6.0dev - [XXXX-XX-XX]
-- [#61](https://github.com/genomic-medicine-sweden/nallorefs/pull/61) - Bumped version to 0.6.0dev
+- [#62](https://github.com/genomic-medicine-sweden/nallorefs/pull/62) - Bumped version to 0.6.0dev
 
 ## 0.5.1 - [2026-11-24]
 - [#57](https://github.com/genomic-medicine-sweden/nallorefs/pull/57) - Updated `vep` references to version 116 in all related files, updated `base_reference_version` to include new vep 116 files
